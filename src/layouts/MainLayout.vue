@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <!--<q-header elevated>
       <q-toolbar>
         <q-btn
           flat
@@ -11,9 +11,9 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <q-toolbar-title>
+          Quasar App
+        </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
@@ -44,16 +44,21 @@
 
     <q-page-container>
       <router-view />
-    </q-page-container>
+    </q-page-container> -->
+
+    <q-footer>
+      <BottomNavbar />
+    </q-footer>
   </q-layout>
 </template>
 
 <script>
 import { defineComponent, ref } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
+//import EssentialLink from 'components/EssentialLink.vue'
+import BottomNavbar from "src/components/BottomNavbar.vue";
 import { api } from "../utils/api";
 import { proxyToJson } from "../utils/utils";
-
+/*
 const linksList = [
   {
     title: "Docs",
@@ -92,41 +97,32 @@ const linksList = [
     link: "https://facebook.quasar.dev",
   },
   {
-    title: "Quasar Awesome",
-    caption: "Community Quasar projects",
-    icon: "favorite",
-    link: "https://awesome.quasar.dev",
-  },
-];
+    title: 'Quasar Awesome',
+    caption: 'Community Quasar projects',
+    icon: 'favorite',
+    link: 'https://awesome.quasar.dev'
+  }
+]*/
 
 export default defineComponent({
   name: "MainLayout",
 
   components: {
-    EssentialLink,
+    //EssentialLink,
+    BottomNavbar,
   },
-  data() {
-    return {
-      myJson: [],
-    };
-  },
-  async mounted() {
-    const API = new api();
-    this.myJson = proxyToJson(await API.getRecipeDetails(479101))[
-      "extendedIngredients"
-    ];
-    console.log(this.myJson);
-  },
-  setup() {
-    const leftDrawerOpen = ref(false);
+
+  /*
+  setup () {
+    const leftDrawerOpen = ref(false)
 
     return {
       essentialLinks: linksList,
       leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
-    };
-  },
+      toggleLeftDrawer () {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+      }
+    }
+  }*/
 });
 </script>
