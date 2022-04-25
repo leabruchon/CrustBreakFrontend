@@ -137,4 +137,97 @@ export class api {
       }, 2000);
     });
   }
+
+  /**
+   * A function with the aim to add the user to the api
+   * @param {String} firstname User's firstname
+   * @param {String} lastname User's lastname
+   * @param {String} birthdate User's birthdate : yyyy-mm-dd
+   * @param {String} email user's mail adress
+   * @param {String} password User's password
+   * @param {object} gouts User's nutrition preferences, example : {"sugar":"no"}
+   * @return {JSON} the json response
+   */
+  addUser(firstname, lastname, birthdate, email, password, gouts) {
+    const url = `${this._host}/api/v1/user/add`;
+    let formData = new FormData();
+
+    formData.append("firstname", firstname);
+    formData.append("lastname", lastname);
+    formData.append("birthdate", birthdate);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("gouts", gouts);
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "POST",
+            data: formData,
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data",
+            },
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              return result;
+            })
+        );
+      }, 3000);
+    });
+  }
+
+  /**
+   * A function with the aim to update the user to the api
+   * @param {Number} user_id Id of the user in the database
+   * @param {String} firstname User's firstname
+   * @param {String} lastname User's lastname
+   * @param {String} birthdate User's birthdate : yyyy-mm-dd
+   * @param {String} email user's mail adress
+   * @param {String} password User's password
+   * @param {object} gouts User's nutrition preferences, example : {"sugar":"no"}
+   * @return {JSON} the json response
+   */
+  updateUser(user_id, firstname, lastname, birthdate, email, password, gouts) {
+    const url = `${this._host}/api/v1/user/update/${user_id}`;
+    let formData = new FormData();
+
+    formData.append("firstname", firstname);
+    formData.append("lastname", lastname);
+    formData.append("birthdate", birthdate);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("gouts", gouts);
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "POST",
+            data: formData,
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data",
+            },
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              return result;
+            })
+        );
+      }, 3000);
+    });
+  }
 }
