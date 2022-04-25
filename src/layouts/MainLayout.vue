@@ -1,6 +1,7 @@
 <template>
+
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <!--<q-header elevated>
       <q-toolbar>
         <q-btn
           flat
@@ -14,8 +15,6 @@
         <q-toolbar-title>
           Quasar App
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -41,14 +40,21 @@
 
     <q-page-container>
       <router-view />
-    </q-page-container>
+    </q-page-container> -->
+
+    <q-footer>
+          <BottomNavbar/>
+    </q-footer>
+      
   </q-layout>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+//import EssentialLink from 'components/EssentialLink.vue'
+import BottomNavbar from 'src/components/BottomNavbar.vue'
 
+/*
 const linksList = [
   {
     title: 'Docs',
@@ -92,15 +98,17 @@ const linksList = [
     icon: 'favorite',
     link: 'https://awesome.quasar.dev'
   }
-]
+]*/
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    //EssentialLink,
+    BottomNavbar
   },
 
+/*
   setup () {
     const leftDrawerOpen = ref(false)
 
@@ -111,6 +119,6 @@ export default defineComponent({
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
     }
-  }
+  }*/
 })
 </script>
