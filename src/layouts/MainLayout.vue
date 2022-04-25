@@ -36,8 +36,8 @@
       </thead>
       <tbody>
         <tr v-for="data in myJson" :key="data">
-          <td>{{ data.title }}</td>
-          <td>{{ data.title }}</td>
+          <td>{{ data.name }}</td>
+          <td>{{ data.aisle }}</td>
         </tr>
       </tbody>
     </q-markup-table>
@@ -112,8 +112,8 @@ export default defineComponent({
   },
   async mounted() {
     const API = new api();
-    this.myJson = proxyToJson(await API.getRecipesFromImage("blablablajjd"))[
-      "results"
+    this.myJson = proxyToJson(await API.getRecipeDetails(479101))[
+      "extendedIngredients"
     ];
     console.log(this.myJson);
   },

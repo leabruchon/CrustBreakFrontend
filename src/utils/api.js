@@ -50,7 +50,6 @@ export class api {
    */
   getRecipeDetails(recipe_id) {
     const url = `${this._host}/api/v1/recette/detail/${recipe_id}`;
-
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(
@@ -71,7 +70,7 @@ export class api {
               return result;
             })
         );
-      }, 1000);
+      }, 3000);
     });
   }
 
