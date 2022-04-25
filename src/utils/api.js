@@ -76,6 +76,38 @@ export class api {
   }
 
   /**
+   * A function with the aim to search for a recipe over our api using several fields
+   * @param {Number} recipe_id The recipe id from the api example : 479101
+   * @return {JSON} the json response
+   */
+  getIngredientListFromRecipe(recipe_id) {
+    const url = `${this._host}/api/v1/recette/generate-liste-de-courses?recipe=${recipe_id}`;
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              return result;
+            })
+        );
+      }, 1000);
+    });
+  }
+
+  /**
    * A function with the aim to generate a recipe list that match all the ingredient of a receipts (currently not working with image -> return always the same result)
    * @param {String} ingredient_list_image String that contains the B64 encoded image
    * @return {JSON} the json response

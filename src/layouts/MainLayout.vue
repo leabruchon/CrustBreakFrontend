@@ -36,10 +36,8 @@
       </thead>
       <tbody>
         <tr v-for="data in myJson" :key="data">
-          <td>{{ data.id }}</td>
           <td>{{ data.title }}</td>
-
-          <td><img :src="data.image" :alt="data.title" /></td>
+          <td>{{ data.title }}</td>
         </tr>
       </tbody>
     </q-markup-table>
@@ -114,15 +112,10 @@ export default defineComponent({
   },
   async mounted() {
     const API = new api();
-    this.myJson = proxyToJson(
-      await API.searchRecipe(
-        "burger",
-        "american",
-        "main course",
-        "vegetarian",
-        ["onion"]
-      )
-    )["results"];
+    this.myJson = proxyToJson(await API.getRecipesFromImage("blablablajjd"))[
+      "results"
+    ];
+    console.log(this.myJson);
   },
   setup() {
     const leftDrawerOpen = ref(false);
