@@ -14,7 +14,7 @@
       />
       <q-route-tab
         icon="cookie"
-        to="/home"
+        to="/"
         exact
       />
       <q-route-tab
@@ -42,6 +42,10 @@ export default defineComponent({
   .q-pa-md{
     background-color: $transparent-grey;
     padding: 0;
+    backdrop-filter: blur(3px);
+    border-radius: 15px 15px 0px 0px;
+
+  
   }
   
 </style>
