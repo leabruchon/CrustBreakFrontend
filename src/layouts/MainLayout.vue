@@ -1,6 +1,6 @@
 <template>
 
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" class="bg-primary">
     <!--<q-header elevated>
       <q-toolbar>
         <q-btn
@@ -28,7 +28,7 @@
       </q-page-container>
 
 
-    <q-footer class="bg-transparent">
+    <q-footer>
           <BottomNavbar/>
     </q-footer>
       

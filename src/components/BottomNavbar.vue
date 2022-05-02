@@ -4,9 +4,10 @@
       <q-tabs
         align="justify"
         class="light-grey"
+        active-color="warning"
+        indicator-color="negative"
       >
 
-    
       <q-route-tab
         icon="photo_camera"
         to="/scan"
@@ -40,13 +41,11 @@ export default defineComponent({
 <style lang="scss">
 
   .q-pa-md{
-    background-color: $transparent-grey;
+    background-color: $negative;
     padding: 0;
+   
     backdrop-filter: blur(3px);
     border-radius: 15px 15px 0px 0px;
-
-  
   }
-  
 </style>
 

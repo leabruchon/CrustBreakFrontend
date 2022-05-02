@@ -25,15 +25,10 @@ $white : #FFFFFF;
 $light-grey : #D7D7D7;
 $black : #000000;
 
-$transparent-grey : rgba(51, 59, 66, .8);
-
-
-
-
 
 // settings couleur de base quasar
 
-$primary   : #1976D2;
+$primary   : #2A333A;
 $secondary : #26A69A;
 $accent    : #9C27B0;
 
@@ -41,6 +36,6 @@ $dark      : #1D1D1D;
 
 
 $positive  : #21BA45;
-$negative  : #C10015;
+$negative  : rgba(51, 59, 66, .8); // transparent grey
 $info      : #31CCEC;
-$warning   : #F2C037;
+$warning   : #C5942D;
