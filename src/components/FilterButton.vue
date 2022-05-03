@@ -1,8 +1,6 @@
-
 <template>
-    <div class="">
+
         <q-btn no-caps push color="warning" icon="filter_list" @click="show()" />
-  </div>
    
 </template>
 

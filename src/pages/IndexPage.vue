@@ -2,11 +2,16 @@
   <q-page class="flex flex-center">
     <FilterButton/>
   </q-page>
+
+      
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import FilterButton from 'src/components/FilterButton.vue'
+
+//checkbox
+import { ref } from 'vue'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -14,5 +19,11 @@ export default defineComponent({
   components: {
     FilterButton
   },
+
+  setup () {
+    return {
+      val: ref(true)
+    }
+  }
 })
 </script>
