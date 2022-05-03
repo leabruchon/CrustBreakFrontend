@@ -29,7 +29,7 @@ export default defineComponent({
   },
   async mounted() {
     const API = new api(); //instanciation de la classe
-    this.data = proxyToJson(await API.getIngredientListFromRecipe(479101)); //assignation de la valeur de retour à une variable qui pourra être utilisée et manipulée dans le template.
+    this.data = await API.getIngredientListFromRecipe(479101); //assignation de la valeur de retour à une variable qui pourra être utilisée et manipulée dans le template.
   },
   setup() {
     ...
@@ -41,32 +41,6 @@ export default defineComponent({
 });
 ```
 
-Imaginons que la valeur de retour possède la fonction suivante (Exemple de la recherche d'une recette) :
-
-```json
-{
-  "results": [
-    {
-      "id": 636595,
-      "title": "Butternut Squash Quinoa Burgers",
-      "image": "https://spoonacular.com/recipeImages/636595-312x231.jpg",
-      "imageType": "jpg"
-    },
-    {
-      "id": 1119161,
-      "title": "Lentil Burgers",
-      "image": "https://spoonacular.com/recipeImages/1119161-312x231.jpg",
-      "imageType": "jpg"
-    }
-  ],
-  "baseUri": "https://spoonacular.com/recipeImages/",
-  "offset": 0,
-  "number": 20,
-  "totalResults": 2,
-  "processingTimeMs": 405
-}
-```
-
-Pour manipuler dans le JavaScript les résultats (`results`) il faut utiliser `this.data['results]`.
+Exemple de la recherche d'une recette, elle retourne une liste `Array` contenant des objets recettes `Recipe` dont la classe est dans le dossier Utils :
 
 L'ensemble des paramètres de chaque appel de l'API est documenté.

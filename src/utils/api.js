@@ -1,3 +1,5 @@
+import { Recipe } from "./Recipe";
+import { User } from "./User";
 export class api {
   constructor() {
     this._host = "http://94.247.183.221:8040";
@@ -36,7 +38,9 @@ export class api {
               const result = JSON.parse(
                 JSON.stringify(Object.assign({}, data))
               );
-              return result;
+              return result["results"].map((r) => {
+                return new Recipe(r["id"], r["title"], r["image"]);
+              });
             })
         );
       }, 3000);
@@ -70,7 +74,7 @@ export class api {
               return result;
             })
         );
-      }, 3000);
+      }, 7000);
     });
   }
 

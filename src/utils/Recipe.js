@@ -1,4 +1,4 @@
-export class Recette {
+export class Recipe {
   /**
    * A function with the aim to add the user to the api
    * @param {Number} id id

@@ -1,29 +1,36 @@
 <template>
   <q-page class="flex flex-center">
-    <FilterButton/>
+    <FilterButton />
   </q-page>
-
-      
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import FilterButton from 'src/components/FilterButton.vue'
-
+import { defineComponent } from "vue";
+import FilterButton from "src/components/FilterButton.vue";
+import { api } from "src/utils/api";
 //checkbox
-import { ref } from 'vue'
+import { ref } from "vue";
 
 export default defineComponent({
-  name: 'IndexPage',
+  name: "IndexPage",
 
   components: {
-    FilterButton
+    FilterButton,
   },
 
-  setup () {
+  async setup() {
+    const API = new api();
+    const recettes = await API.searchRecipe(
+      "burger",
+      "american",
+      "main course",
+      "vegetarian",
+      ["onion"]
+    );
+    console.log(recettes[0].title);
     return {
-      val: ref(true)
-    }
-  }
-})
+      val: ref(true),
+    };
+  },
+});
 </script>
