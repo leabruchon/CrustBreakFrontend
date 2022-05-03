@@ -50,7 +50,7 @@ export class api {
   /**
    * A function with the aim to search for a recipe over our api using several fields
    * @param {Number} recipe_id The recipe id from the api example : 479101
-   * @return {JSON} the json response
+   * @return {Recipe} the json response
    */
   getRecipeDetails(recipe_id) {
     const url = `${this._host}/api/v1/recette/detail/${recipe_id}`;
@@ -68,10 +68,18 @@ export class api {
               return res.json();
             })
             .then((data) => {
-              const result = JSON.parse(
-                JSON.stringify(Object.assign({}, data))
+              const r = JSON.parse(JSON.stringify(Object.assign({}, data)));
+              return new Recipe(
+                r["id"],
+                r["title"],
+                r["image"],
+                r["extendedIngredients"],
+                r["readyInMinutes"],
+                r["dishTypes"],
+                r["summary"],
+                r["analyzedInstructions"],
+                r["equipment"]
               );
-              return result;
             })
         );
       }, 7000);
