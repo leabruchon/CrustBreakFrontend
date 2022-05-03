@@ -143,7 +143,9 @@ export class api {
               const result = JSON.parse(
                 JSON.stringify(Object.assign({}, data))
               );
-              return result;
+              return result["results"].map((r) => {
+                return new Recipe(r["id"], r["title"], r["image"]);
+              });
             })
         );
       }, 2000);
@@ -237,6 +239,114 @@ export class api {
                 JSON.stringify(Object.assign({}, data))
               );
               return result;
+            })
+        );
+      }, 3000);
+    });
+  }
+
+  /**
+   * A function with the aim to search for a recipe over our api using several fields
+   * @param {Number} user_id user's Id
+   * @return {Array} Array of the favorite recipes
+   */
+  getUserFavoriteRecipes(user_id) {
+    const url = `${this._host}/api/v1/user/${user_id}/get/favorites-receipes`;
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              return result["recipes"].map((r) => {
+                return new Recipe(r["id"], r["title"]);
+              });
+            })
+        );
+      }, 3000);
+    });
+  }
+  /**
+   * A function with the aim to add the user to the api
+   * @param {Number} user_id User's Id
+   * @param {Number} recette_id Recipe's id
+   * @param {String} recette_name Recipe's name
+   * @return {JSON} the json response
+   */
+  addFavoriteRecipe(user_id, recette_id, recette_name) {
+    const url = `${this._host}/api/v1/user/${user_id}/add/to-favorites`;
+    let formData = new FormData();
+
+    formData.append("recette_id", recette_id);
+    formData.append("recette_name", recette_name);
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "POST",
+            data: formData,
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data",
+            },
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              return result;
+            })
+        );
+      }, 3000);
+    });
+  }
+
+  /*PAS ENCORE FONCTIONNEL */
+
+  /**
+   * A function with the aim to search for a recipe over our api using several fields
+   * @param {Number} user_id user's Id
+   * @return {Array} Array of the favorite recipes
+   */
+  getUserTodoRecipes(user_id) {
+    const url = `${this._host}/api/v1/user/${user_id}/get/todo-receipes`;
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              return result["recipes"].map((r) => {
+                return new Recipe(r["id"], r["title"]);
+              });
             })
         );
       }, 3000);

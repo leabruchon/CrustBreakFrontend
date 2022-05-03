@@ -1,3 +1,6 @@
+import { api, api } from "./api";
+import { Recipe } from "./Recipe";
+
 export class User {
   /**
    * A function with the aim to add the user to the api
@@ -10,13 +13,34 @@ export class User {
    * @param {object} gouts User's nutrition preferences, example : {"sugar":"no"}
    */
   constructor(id, firstname, lastname, birthdate, email, password, gouts) {
+    this._id = id;
     this._firstname = firstname;
     this._lastname = lastname;
     this._birthdate = birthdate;
     this._email = email;
     this._password = password;
     this._gouts = gouts;
+
+    const API = new api();
+
+    this._favorite_recipes = await API.getUserFavoriteRecipes(this._id);
+    this._todo_recipes = await API.getUserTodoRecipes(this._id);
   }
+
+  async getUserFavoriteRecipes(){
+    const API = new api();
+    this._favorite_recipes = await API.getUserFavoriteRecipes(this._id)
+    return this._favorite_recipes;
+  }
+
+  async getUserFavoriteRecipes(){
+    const API = new api();
+    this._todo_recipes = await API.getUserTodoRecipes(this._id)
+    return this._todo_recipes;
+
+  }
+
+  addFavoriteRecipe(recipe_id) {}
 
   get id() {
     return this._id;

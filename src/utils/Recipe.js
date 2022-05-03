@@ -14,7 +14,7 @@ export class Recipe {
   constructor(
     id,
     title,
-    image,
+    image = "",
     ingredientList = [],
     readyInMinutes = 0,
     dishTypes = [],
