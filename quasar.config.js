@@ -100,11 +100,13 @@ module.exports = configure(function (ctx) {
       // (like functional components as one of the examples),
       // you can manually specify Quasar components/directives to be available everywhere:
       //
-      // components: [],
+      components: ['QCheckbox'],
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'BottomSheet'
+      ]
     },
 
     // animations: 'all', // --- includes all animations
