@@ -111,7 +111,7 @@ export class api {
               const result = JSON.parse(
                 JSON.stringify(Object.assign({}, data))
               );
-              return result;
+              return result["list"];
             })
         );
       }, 1000);

@@ -20,8 +20,8 @@ export default defineComponent({
 
   async setup() {
     const API = new api();
-    const recette = await API.getRecipeDetails(479101);
-    console.log(recette._title);
+    const recette = await API.getIngredientListFromRecipe(479101);
+    console.log(recette);
     return {
       val: ref(true),
     };
