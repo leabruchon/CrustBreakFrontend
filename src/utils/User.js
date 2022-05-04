@@ -1,16 +1,16 @@
-import { api, api } from "./api";
+import { api } from "./api";
 import { Recipe } from "./Recipe";
 
 export class User {
   /**
-   * A function with the aim to add the user to the api
+   * constructor of the User class
    * @param {Number} id User's id
    * @param {String} firstname User's firstname
    * @param {String} lastname User's lastname
    * @param {String} birthdate User's birthdate : yyyy-mm-dd
    * @param {String} email user's mail adress
    * @param {String} password User's password
-   * @param {object} gouts User's nutrition preferences, example : {"sugar":"no"}
+   * @param {Object} gouts User's nutrition preferences, example : {"sugar":"no"}
    */
   constructor(id, firstname, lastname, birthdate, email, password, gouts) {
     this._id = id;
@@ -23,24 +23,60 @@ export class User {
 
     const API = new api();
 
-    this._favorite_recipes = await API.getUserFavoriteRecipes(this._id);
-    this._todo_recipes = await API.getUserTodoRecipes(this._id);
+    this._favorite_recipes = [];
+    this._todo_recipes = [];
   }
 
-  async getUserFavoriteRecipes(){
+  /**
+   * A function with the aim to get the user's favorite recipes of course it re assign it to the attribut of the user
+   * @returns {Array} The favorite recipes in an array
+   */
+  async getUserFavoriteRecipes() {
     const API = new api();
-    this._favorite_recipes = await API.getUserFavoriteRecipes(this._id)
+    this._favorite_recipes = await API.getUserFavoriteRecipes(this._id);
     return this._favorite_recipes;
   }
 
-  async getUserFavoriteRecipes(){
+  /**
+   * A function with the aim to get the user's todo recipes of course it re assign it to the attribut of the user
+   * @returns {Array} The todo recipes in an array containing dictionnaries with this structure {date:<meal_date>,recipe:<Object Recipe>}
+   */
+  async getUserTodoRecipes() {
     const API = new api();
-    this._todo_recipes = await API.getUserTodoRecipes(this._id)
+    this._todo_recipes = await API.getUserTodoRecipes(this._id);
     return this._todo_recipes;
-
   }
 
-  addFavoriteRecipe(recipe_id) {}
+  /**
+   * Add a recipe to the user's favorite recipes
+   * @param {Number} recipe_id Recipe Id
+   * @param {String} recette_name Recipe's name
+   * @returns {Array} The favorite recipes in an array
+   */
+  async addFavoriteRecipe(recipe_id, recette_name) {
+    const API = new api();
+    await API.addFavoriteRecipe(this._id, recipe_id, recette_name);
+    await this.getUserFavoriteRecipes();
+  }
+
+  /**
+   * Add a recipe to the user's favorite recipes
+   * @param {Number} recipe_id Recipe Id
+   * @param {String} recette_name Recipe's name
+   * @param {Date} meal_date Date where the user will do the recipe date should be : addTodoRecipe(... , ... , new Date(year, month-1, day))
+   * @returns {Array} The favorite recipes in an array
+   */
+  async addTodoRecipe(recipe_id, recette_name, meal_date) {
+    console.log(meal_date);
+    const API = new api();
+    await API.addTodoRecipe(
+      this._id,
+      recipe_id,
+      recette_name,
+      meal_date.toISOString().split("T")[0]
+    );
+    await this.getUserTodoRecipes();
+  }
 
   get id() {
     return this._id;

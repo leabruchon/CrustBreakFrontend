@@ -178,7 +178,7 @@ export class api {
         resolve(
           fetch(url, {
             method: "POST",
-            data: formData,
+            body: formData,
             headers: {
               Accept: "application/json",
               "Content-Type": "multipart/form-data",
@@ -211,7 +211,7 @@ export class api {
    */
   updateUser(user_id, firstname, lastname, birthdate, email, password, gouts) {
     const url = `${this._host}/api/v1/user/update/${user_id}`;
-    let formData = new FormData();
+    const formData = new FormData();
 
     formData.append("firstname", firstname);
     formData.append("lastname", lastname);
@@ -225,7 +225,7 @@ export class api {
         resolve(
           fetch(url, {
             method: "POST",
-            data: formData,
+            body: formData,
             headers: {
               Accept: "application/json",
               "Content-Type": "multipart/form-data",
@@ -271,7 +271,7 @@ export class api {
                 JSON.stringify(Object.assign({}, data))
               );
               return result["recipes"].map((r) => {
-                return new Recipe(r["id"], r["title"]);
+                return new Recipe(r["receipe_id"], r["receipe_name"]);
               });
             })
         );
@@ -287,7 +287,7 @@ export class api {
    */
   addFavoriteRecipe(user_id, recette_id, recette_name) {
     const url = `${this._host}/api/v1/user/${user_id}/add/to-favorites`;
-    let formData = new FormData();
+    const formData = new FormData();
 
     formData.append("recette_id", recette_id);
     formData.append("recette_name", recette_name);
@@ -297,11 +297,7 @@ export class api {
         resolve(
           fetch(url, {
             method: "POST",
-            data: formData,
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "multipart/form-data",
-            },
+            body: formData,
           })
             .then((res) => {
               return res.json();
@@ -345,8 +341,49 @@ export class api {
                 JSON.stringify(Object.assign({}, data))
               );
               return result["recipes"].map((r) => {
-                return new Recipe(r["id"], r["title"]);
+                return {
+                  recipe: new Recipe(r["receipe_id"], r["receipe_name"]),
+                  date: r["meal_date"],
+                };
               });
+            })
+        );
+      }, 3000);
+    });
+  }
+
+  /**
+   * A recipe to the user's todo recipe in the API
+   * @param {Number} user_id User's Id
+   * @param {Number} recette_id Recipe's id
+   * @param {String} recette_name Recipe's name
+   * @param {String} meal_date Recipe's date YYYY-MM-DD
+   * @return {JSON} the json response
+   */
+  addTodoRecipe(user_id, recette_id, recette_name, meal_date) {
+    const url = `${this._host}/api/v1/user/${user_id}/add/todo-receipes`;
+    const formData = new FormData();
+
+    formData.append("recette_id", recette_id);
+    formData.append("recette_name", recette_name);
+    formData.append("meal_date", meal_date);
+    formData.append("meal_type", "");
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              return result;
             })
         );
       }, 3000);
