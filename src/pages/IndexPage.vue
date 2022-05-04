@@ -17,11 +17,5 @@ export default defineComponent({
   components: {
     FilterButton,
   },
-
-  async setup() {
-    return {
-      val: ref(true),
-    };
-  },
 });
 </script>
