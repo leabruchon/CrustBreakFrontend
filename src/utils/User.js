@@ -77,6 +77,23 @@ export class User {
     );
     await this.getUserTodoRecipes();
   }
+  /**
+   * Update of the User class
+   * @param {String} firstname User's firstname
+   * @param {String} lastname User's lastname
+   * @param {String} birthdate User's birthdate : yyyy-mm-dd
+   * @param {String} email user's mail adress
+   * @param {String} password User's password
+   * @param {Object} gouts User's nutrition preferences, example : {"sugar":"no"}
+   */
+  updateProfile(firstname, lastname, birthdate, email, password, gouts) {
+    this._firstname = firstname;
+    this._lastname = lastname;
+    this._birthdate = birthdate;
+    this._email = email;
+    this._password = password;
+    this._gouts = gouts;
+  }
 
   get id() {
     return this._id;
