@@ -54,10 +54,8 @@ getIngredientListFromRecipe(recipe_id); //générer une liste de course
 getRecipesFromImage(ingredient_list_image); //générer des recette à partir d'une image
 addUser(firstname, lastname, birthdate, email, password, gouts);
 deleteUser(user_id); //suppression de compte
-
-//pas encore faites
-signInUser();
-signUpUser();
+checkUserCanSignUp(email, password); //check if the user can sign up -> appeler addUser après
+checkUserCanSignIn(email, password); //check if the user can sign in
 ```
 
 ## Les requetes avec l'objet `User` (Utilisateur connecté -> il faut un compte)
@@ -81,4 +79,26 @@ user.addFavoriteRecipe(recipe_id, recette_name);
 user.getUserTodoRecipes();
 user.addTodoRecipe(recipe_id, recette_name, meal_date);
 user.updateProfile(firstname, lastname, birthdate, email, password, gouts);
+```
+
+## Inscription utilisateur :
+
+```js
+const API = new api();
+const rep = await API.checkUserCanSignUp("oli@hotmail.fr", "password2");
+if (rep["code"] === 1) {
+  console.log("user can sign Up");
+  const rep2 = await API.addUser(
+    "oliv",
+    "fct",
+    "2022-01-01",
+    "oli@hotmail.fr",
+    "password2",
+    '"sugar":"no"'
+  );
+  console.log(rep2);
+  console.log("User added ! ");
+} else {
+  console.log(rep["message"]);
+}
 ```

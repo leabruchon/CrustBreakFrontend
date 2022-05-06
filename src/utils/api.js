@@ -153,6 +153,40 @@ export class api {
   }
 
   /**
+   * A function that verify if the user can sign up, if it's ok you can user the function addUser
+   * @param {String} email user's mail adress
+   * @param {String} password User's password
+   * @return {object} {code, message} code : 1 if okay else -1, message : describe what's wrong
+   */
+  checkUserCanSignUp(email, password) {
+    const url = `${this._host}/api/v1/user/can-sign-up`;
+    let formData = new FormData();
+
+    formData.append("email", email);
+    formData.append("password", password);
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              return { code: result["code"], message: result["message"] };
+            })
+        );
+      }, 3000);
+    });
+  }
+
+  /**
    * A function with the aim to add the user to the api
    * @param {String} firstname User's firstname
    * @param {String} lastname User's lastname
@@ -179,10 +213,6 @@ export class api {
           fetch(url, {
             method: "POST",
             body: formData,
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "multipart/form-data",
-            },
           })
             .then((res) => {
               return res.json();
@@ -195,6 +225,57 @@ export class api {
             })
         );
       }, 3000);
+    });
+  }
+
+  /**
+   * A function that verify if the user can sign in, if it's ok the user is signed in
+   * @param {String} email user's mail adress
+   * @param {String} password User's password
+   * @return {object} {code, message, user } code : 1 if okay else -1, message : describe what's wrong if it's okay it return the user
+   */
+  checkUserCanSignIn(email, password) {
+    const url = `${this._host}/api/v1/user/can-sign-in`;
+    let formData = new FormData();
+
+    formData.append("email", email);
+    formData.append("password", password);
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              if (result["code"] == 1) {
+                //user can sign in
+                return {
+                  code: result["code"],
+                  message: result["message"],
+                  user: new User(
+                    2,
+                    result["user"]["prenom"],
+                    result["user"]["nom"],
+                    result["user"]["naissance"],
+                    result["user"]["email"],
+                    result["user"]["password"],
+                    result["user"]["gouts"]
+                  ),
+                };
+              } else {
+                return { code: result["code"], message: result["message"] };
+              }
+            })
+        );
+      }, 4000);
     });
   }
 

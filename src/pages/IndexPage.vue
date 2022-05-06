@@ -9,6 +9,7 @@ import { defineComponent } from "vue";
 import FilterButton from "src/components/FilterButton.vue";
 //checkbox
 import { ref } from "vue";
+import { api } from "src/utils/api";
 
 export default defineComponent({
   name: "IndexPage",
