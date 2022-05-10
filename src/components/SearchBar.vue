@@ -24,9 +24,5 @@ export default defineComponent({
         border-radius: 30px;
         width: 65%;
     }
-
-    .q-field__inner{
-       
-    }
 </style>
 
