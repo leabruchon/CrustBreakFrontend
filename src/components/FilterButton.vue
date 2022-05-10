@@ -1,60 +1,45 @@
 <template>
+    <q-btn icon="filter_list" color="warning" @click="open('bottom')" />
+    <q-dialog v-model="dialog" :position="position"> 
+        <q-card style="width: 350px">
+        <div class = "all-filters">
+            <div class = "header-filters">
+                <div><q-btn no-caps icon = "close"  v-close-popup /></div>
+                <div class="text-h6 text-weight-bold">Gérer mes goûts</div>
+            </div>
+            <q-card-section class="row items-center no-wrap">
+                <div>
+                    <div class="text-weight-bold">Régime alimentaire</div>
+                    <div class="text-weight-bold">Coût</div>
+                </div>
+            </q-card-section>
+        </div>
+      </q-card>
+    </q-dialog>
 
-        <q-btn no-caps push color="warning" icon="filter_list" @click="show()" />
-   
 </template>
 
 
 <script>
 import { defineComponent } from 'vue'
-import { useQuasar } from 'quasar'
+import { ref } from 'vue'
 
 export default defineComponent({
   name: 'FilterButton',
 
-//setup bottom sheet
   setup () {
-    const $q = useQuasar()
+    const dialog = ref(false)
+    const position = ref('top')
 
-    function show (grid) {
-      $q.bottomSheet({
-        message: 'Gérer mes goûts',
-        grid,
-        actions: [
-          {
-            label: 'Drive',
-            img: 'https://cdn.quasar.dev/img/logo_drive_128px.png',
-            id: 'drive'
-          },
-          {
-            label: 'Keep',
-            img: 'https://cdn.quasar.dev/img/logo_keep_128px.png',
-            id: 'keep'
-          },
-          {
-            label: 'Google Hangouts',
-            img: 'https://cdn.quasar.dev/img/logo_hangouts_128px.png',
-            id: 'calendar'
-          },
-          {
-            label: 'Calendar',
-            img: 'https://cdn.quasar.dev/img/logo_calendar_128px.png',
-            id: 'calendar'
-          },
-          {},
-          
-          
-        ]
-      }).onOk(action => {
-        // console.log('Action chosen:', action.id)
-      }).onCancel(() => {
-        // console.log('Dismissed')
-      }).onDismiss(() => {
-        // console.log('I am triggered on both OK and Cancel')
-      })
+    return {
+      dialog,
+      position,
+
+      open (pos) {
+        position.value = pos
+        dialog.value = true
+      }
     }
-
-    return { show }
   }
 
 })
@@ -62,13 +47,24 @@ export default defineComponent({
 
 <style lang="scss">
 
-    .q-card{
-        background-color: $light-blue;
+    .q-btn{
+        border-radius: 20px;
+        padding: 7px;
     }
 
-    .q-btn{
-        border-radius: 50px;
-        padding: 10px;
+    .q-card{
+        background-color: $info;
+        color: $positive;
+    }
+
+    .q-btn:before{
+        box-shadow: none;
+    }
+
+    .header-filters{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 
 </style>
