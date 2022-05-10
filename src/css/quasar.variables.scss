@@ -13,29 +13,16 @@
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
 
+// settings couleur de base quasar en dark mode
 
-// Dark mode 
+$primary   : #2A333A; //background
+$secondary : #1E2130; // dark blue
+$accent    : #D7D7D7; //light grey
 
-$background : #2A333A;
-$ocre : #C5942D;
-$light-blue : #849EB2;
-$dark-blue : #1E2130;
-
-$white : #FFFFFF;
-$light-grey : #D7D7D7;
-$black : #000000;
+$dark      : #000000; //black
 
 
-// settings couleur de base quasar
-
-$primary   : #2A333A;
-$secondary : #26A69A;
-$accent    : #9C27B0;
-
-$dark      : #1D1D1D;
-
-
-$positive  : #21BA45;
+$positive  : #FFFFFF; //white
 $negative  : rgba(51, 59, 66, .8); // transparent grey
-$info      : #31CCEC;
-$warning   : #C5942D;
+$info      : #849EB2; //light blue
+$warning   : #C5942D; //ocre
