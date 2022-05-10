@@ -1,7 +1,5 @@
-
 const routes = [
-  
-  
+
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
@@ -12,6 +10,16 @@ const routes = [
 
       { path: '/calendar', component: () => import('pages/CalendarPage.vue') },
     ]
+  },
+
+  {
+    path: '/connexion', 
+    component: () => import('pages/authentification/ConnexionPage.vue')
+  },
+
+  {
+    path: '/inscription',
+    component: () => import('pages/authentification/InscriptionPage.vue'),
   },
 
   // Always leave this as last one,
