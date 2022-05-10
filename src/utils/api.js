@@ -14,7 +14,13 @@ export class api {
    * @param {Array} exclude_ingredient The list of ingredients to exclude, exemple : ['onion','tomato']
    * @return {JSON} the json response
    */
-  searchRecipe(search_title, cusine_type, meal_type, diet, exclude_ingredient) {
+  searchRecipe(
+    search_title,
+    cusine_type = "",
+    meal_type = "",
+    diet = "",
+    exclude_ingredient = []
+  ) {
     const url = `${
       this._host
     }/api/v1/recette/search?name=${search_title.toLowerCase()}&cuisine=${cusine_type.toLowerCase()}&type=${meal_type.toLowerCase()}&diet=${diet.toLowerCase()}&exclude=${exclude_ingredient
