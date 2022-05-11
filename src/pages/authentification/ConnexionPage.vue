@@ -1,5 +1,12 @@
 <template>
-  Connexion
+  <div class = "login-title">
+    <h4>Connexion</h4>
+  </div>
+  
+
+  <div class = "login-form-container">
+   
+  </div>
 </template>
 
 <script>
