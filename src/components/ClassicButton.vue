@@ -1,5 +1,12 @@
 <template>
-  <div>TEST</div>
+  <div>
+    <q-btn
+      :ripple="{ center: true }"
+      rounded
+      color="warning"
+      label="Outline Rounded"
+    />
+  </div>
 </template>
 
 <script>
