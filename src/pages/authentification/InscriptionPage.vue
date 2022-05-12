@@ -11,13 +11,34 @@
                 >
                     <q-input
                     outlined
-                    v-model="form.name"
-                    label="Nom d'utilisateur"
+                    v-model="form.firstname"
+                    label="Prénom"
                     class="q-my-md"
                     label-color = "negative"   
                     color = "warning"
                     bg-color="positive"
-                    :rules="[ val => val.length >= 4 || 'Minimum 4 caractère']"
+                    :rules="[ val => val.length >= 3 || 'Minimum 3 caractère']"
+                    />
+
+                    <q-input
+                    outlined
+                    v-model="form.lastname"
+                    label="Nom"
+                    class="q-my-md"
+                    label-color = "negative"   
+                    color = "warning"
+                    bg-color="positive"
+                    :rules="[ val => val.length >= 3 || 'Minimum 3 caractère']"
+                    />
+
+                    <q-input
+                    outlined
+                    type="date"
+                    v-model="form.birthdate"
+                    class="q-my-md"
+                    label-color = "negative"   
+                    color = "warning"
+                    bg-color="positive"
                     />
 
                     <q-input
@@ -61,7 +82,7 @@
                     type="submit"
                     color="warning"
                     class = "text-capitalize "
-                    label="Inscription"
+                    label="Je m'inscris !"
                     />
                 </q-form>
             </div>
@@ -80,7 +101,9 @@ export default defineComponent({
   data () {
     return {
       form: {
-        name: '',
+        firstname: '',
+        lastname: '',
+        birthdate: '',
         email: '',
         password: '',
         password_confirmation: ''
@@ -107,6 +130,7 @@ export default defineComponent({
 
     h6{
         color: $positive;
+        margin: 0;
     }
 
    
