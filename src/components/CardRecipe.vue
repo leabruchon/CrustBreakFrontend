@@ -1,18 +1,23 @@
 <template>
-  <div class="Card">
-    <div class="Img"></div>
-    <div class="BottomCard">
-      <!--
-      Label puis icon
-      -->
-    </div>
-  </div>
+  <div>TA MERE</div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
+import { api } from "../utils/api";
 
 export default defineComponent({
   name: "CardRecipe",
+
+  data() {
+    return { MyRecipe: null };
+  },
+
+  async mounted() {
+    const API = new api();
+    const data = await API.searchRecipe("burger");
+    this.MyRecipe = data[0];
+    console.log(data[0]);
+  },
 });
 </script>
