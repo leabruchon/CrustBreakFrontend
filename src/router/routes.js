@@ -11,6 +11,8 @@ const routes = [
       { path: '/scan', component: () => import('pages/ScanPage.vue') },
 
       { path: '/calendar', component: () => import('pages/CalendarPage.vue') },
+
+      { path: '/recipe', component: () => import('pages/RecipePage.vue') },
     ]
   },
 
