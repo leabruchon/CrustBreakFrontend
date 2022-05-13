@@ -5,9 +5,10 @@
       :ripple="{ center: true }"
       rounded
       color="warning"
-      label="Outline Rounded"
+      v-bind:label="BtnLabel"
       no-caps
     />
+
     <!--
       Chercher comment faire pour que le label soit une variable
       -->
@@ -19,6 +20,13 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ClassicButton",
+  props: {
+    BtnLabel: {
+      type: String,
+      required: true,
+      default: "ButtonLabel",
+    },
+  },
 });
 </script>
 
