@@ -15,7 +15,7 @@ const routes = [
       { path: '/recipe', component: () => import('pages/RecipePage.vue') },
     ]
   },
-
+ 
   // Always leave this as last one,
   // but you can also remove it
   {
