@@ -31,7 +31,7 @@ export default defineComponent({
 <style lang="scss">
 
 .backgroundRecipe {
-    background-color: $dark-blue;
+    background-color: $secondary;
     border-radius: 12px;
     color: white;
 
