@@ -1,12 +1,18 @@
 <template>
   <div class="card">
-    <img :src="LinkImg" />
-    <div class="bottom">{{ RecetteTitle }}</div>
+    <div class="container">
+      <img src="../assets/492564-312x231.jpg" /><span
+        class="material-icons md-inactive iconLike"
+        >favorite</span
+      >
+    </div>
+    <div class="bottom">Exemple nom de recette long sur deux lignes</div>
   </div>
 </template>
 
 <script>
 import { defineComponent, onMounted } from "vue";
+import "material-icons/iconfont/material-icons.css";
 import { api } from "../utils/api";
 
 export default defineComponent({
@@ -21,13 +27,14 @@ export default defineComponent({
   },
 
   async mounted() {
-    const API = new api();
-    const data = await API.searchRecipe("burger");
-    this.MyRecipe = data[0];
-    console.log(data[0]);
-    console.log(this.MyRecipe._id);
-    this.RecetteTitle = this.MyRecipe._title;
-    this.LinkImg = this.MyRecipe._image;
+    //const API = new api();
+    //const data = await API.searchRecipe("burger");
+    //this.MyRecipe = data[0];
+    //console.log(data[0]);
+    //this.RecetteTitle = this.MyRecipe._title;
+    //this.LinkImg = this.MyRecipe._image;
+    //console.log(this.MyRecipe._image);
+    // mettre les variables dans le code :src
   },
 });
 </script>
@@ -50,5 +57,16 @@ img {
   font-weight: 800;
   margin: 4px;
   height: 2rem;
+  line-height: 0.8rem;
+}
+
+.iconLike {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  font-size: 2rem;
+}
+.container {
+  position: relative;
 }
 </style>
