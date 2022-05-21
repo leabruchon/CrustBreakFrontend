@@ -1,40 +1,70 @@
 <template>
   <div class="card">
     <div class="container">
-      <img src="../assets/492564-312x231.jpg" /><span
-        class="material-icons md-inactive iconLike"
+      <img :src="RecetteImg" /><span
+        v-on:click="ClickLike(this.RecetteLiked)"
+        id="Icon"
+        class="material-icons-outlined md-inactive iconLike"
         >favorite</span
       >
     </div>
-    <div class="bottom">Exemple nom de recette long sur deux lignes</div>
+    <div class="bottom">{{ RecetteTitle }}</div>
   </div>
 </template>
 
 <script>
 import { defineComponent, onMounted } from "vue";
 import "material-icons/iconfont/material-icons.css";
-import { api } from "../utils/api";
 
 export default defineComponent({
   name: "CardRecipe",
 
-  data() {
-    return {
-      RecetteTitle: "",
-      LinkImg: "",
-      RecetteLiked: "",
-    };
+  props: {
+    RecetteID: {
+      type: String,
+      required: true,
+    },
+    RecetteTitle: {
+      type: String,
+      required: true,
+      default: "Nom Recette un peu long",
+    },
+    RecetteImg: {
+      type: String,
+      required: true,
+      default: "https://spoonacular.com/recipeImages/639465-556x370.jpg",
+    },
+    RecetteLiked: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
 
-  async mounted() {
-    //const API = new api();
-    //const data = await API.searchRecipe("burger");
-    //this.MyRecipe = data[0];
-    //console.log(data[0]);
-    //this.RecetteTitle = this.MyRecipe._title;
-    //this.LinkImg = this.MyRecipe._image;
-    //console.log(this.MyRecipe._image);
-    // mettre les variables dans le code :src
+  data() {
+    return {};
+  },
+
+  methods: {
+    LikedState() {
+      if (this.RecetteLiked == false) {
+        document.getElementById("Icon").style.color = "grey";
+        console.log("C gri");
+      }
+      if (this.RecetteLiked == true) {
+        document.getElementById("Icon").style.color = "red";
+      }
+    },
+
+    //NOT WORKING
+    ClickLike(Recette_ID) {
+      this.$emit("AddToLike", Recette_ID);
+      console.log(Recette_ID);
+    },
+  },
+
+  mounted() {
+    this.LikedState();
   },
 });
 </script>
@@ -45,19 +75,23 @@ export default defineComponent({
   width: 40%;
   background-color: white;
   border-radius: 16px;
+
+  width: min-content;
 }
 
 img {
-  width: 100%;
+  width: 128px;
   height: auto;
   max-width: 100%;
 }
 
 .bottom {
   font-weight: 800;
-  margin: 4px;
+  margin-left: 4px;
+  margin-right: 0px;
   height: 2rem;
   line-height: 0.8rem;
+  width: 124px;
 }
 
 .iconLike {
@@ -68,5 +102,6 @@ img {
 }
 .container {
   position: relative;
+  display: inline-block;
 }
 </style>
