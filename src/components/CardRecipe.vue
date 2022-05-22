@@ -2,7 +2,7 @@
   <div class="card">
     <div class="container">
       <img :src="RecetteImg" /><span
-        v-on:click="ClickLike(this.RecetteLiked)"
+        v-on:click="ClickLike(this.RecetteID)"
         id="Icon"
         class="material-icons-outlined md-inactive iconLike"
         >favorite</span
@@ -23,6 +23,7 @@ export default defineComponent({
     RecetteID: {
       type: String,
       required: true,
+      default: "000000",
     },
     RecetteTitle: {
       type: String,
@@ -49,17 +50,17 @@ export default defineComponent({
     LikedState() {
       if (this.RecetteLiked == false) {
         document.getElementById("Icon").style.color = "grey";
-        console.log("C gri");
+        console.log("Not liked");
       }
       if (this.RecetteLiked == true) {
         document.getElementById("Icon").style.color = "red";
       }
     },
 
-    //NOT WORKING
+    //NOT WORKING need parent
     ClickLike(Recette_ID) {
       this.$emit("AddToLike", Recette_ID);
-      console.log(Recette_ID);
+      console.log("ID recette add : " + Recette_ID);
     },
   },
 
