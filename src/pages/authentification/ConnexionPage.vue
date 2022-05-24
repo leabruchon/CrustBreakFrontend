@@ -48,9 +48,11 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { api } from "../../utils/api"
 
 export default defineComponent({
   name: 'ConnexionPage',
+
 
   data () {
     return {
@@ -60,8 +62,18 @@ export default defineComponent({
       }
     }
   },
+
   methods: {
-    submitForm () {
+    async submitForm () {
+      const API = new api();
+
+      const valeur = await API.checkUserCanSignIn(this.form.email, this.form.password);
+
+      if(valeur['code'] == 1){
+        const user = valeur['user']
+      }
+      else alert(valeur['message'])
+    
       alert('Formulaire envoyé !')
     },
     validateEmail (email) {
