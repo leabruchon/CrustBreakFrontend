@@ -49,6 +49,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { api } from "../../utils/api"
+import { SessionStorage } from 'quasar'
 
 export default defineComponent({
   name: 'ConnexionPage',
@@ -71,13 +72,18 @@ export default defineComponent({
 
       if(valeur['code'] == 1){
         const user = valeur['user']
+
+        // mettre variable de session dans le local storage
+        SessionStorage.set('user', user)
+        this.$router.push({ name: 'home' });
+
       }
       else alert(valeur['message'])
     
       alert('Formulaire envoyé !')
     },
+
     validateEmail (email) {
-      // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
     }
