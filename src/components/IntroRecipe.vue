@@ -39,7 +39,7 @@
     <ul>
       <li>Sweetened condensed milk</li>
       <li>Brown sugar</li>
-      <li>Corn syrup</li>
+      <li>Corn syrups</li>
       <li>Butter</li>
       <li>Sweetened condensed milk</li>
       <li>Candy</li>
