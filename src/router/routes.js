@@ -16,6 +16,7 @@ const routes = [
 
   {
     path: '/connexion', 
+    name: 'connexion',
     component: () => import('pages/authentification/ConnexionPage.vue')
   },
 

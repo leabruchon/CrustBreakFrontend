@@ -73,14 +73,11 @@ export default defineComponent({
       if(valeur['code'] == 1){
         const user = valeur['user']
 
-        // mettre variable de session dans le local storage
-        SessionStorage.set('user', user)
+        SessionStorage.set('user', user.getid())
         this.$router.push({ name: 'home' });
 
       }
       else alert(valeur['message'])
-    
-      alert('Formulaire envoyé !')
     },
 
     validateEmail (email) {
