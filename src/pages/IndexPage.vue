@@ -20,7 +20,9 @@ export default defineComponent({
 
   components: {
     FilterButton,
-    SearchBar
+    SearchBar,
+    CardRecipe,
+    SpinnerGenerateRecipe
   }
 });
 </script>
