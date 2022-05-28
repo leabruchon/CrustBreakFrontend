@@ -15,18 +15,12 @@ import FilterButton from "src/components/FilterButton.vue";
 import SearchBar from "src/components/SearchBar.vue";
 import CardRecipe from "src/components/CardRecipe.vue";
 
-//checkbox
-import { ref } from "vue";
-import { api } from "src/utils/api";
-
 export default defineComponent({
   name: "IndexPage",
 
   components: {
     FilterButton,
-    SearchBar,
-    SpinnerGenerateRecipe,
-    CardRecipe,
-  },
+    SearchBar
+  }
 });
 </script>

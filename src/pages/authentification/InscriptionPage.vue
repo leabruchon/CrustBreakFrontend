@@ -94,6 +94,7 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { api } from "../../utils/api"
 
 export default defineComponent({
   name: 'InscriptionPage',
@@ -111,7 +112,9 @@ export default defineComponent({
     }
   },
   methods: {
-    submitForm () {
+    async submitForm () {
+      const API = new api();
+      const newUser = API.addUser(this.form.firstname, this.form.lastname, this.form.birthdate, this.form.email, this.form.password)
       alert('Formulaire envoyé !')
     },
     validateEmail (email) {
