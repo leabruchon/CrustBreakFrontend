@@ -1,17 +1,28 @@
-
 const routes = [
-  
-  
+
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
+      { path: '', name: 'home', component: () => import('pages/IndexPage.vue') },
 
       { path: '/scan', component: () => import('pages/ScanPage.vue') },
 
       { path: '/calendar', component: () => import('pages/CalendarPage.vue') },
+
+      { path: '/recipe', component: () => import('pages/RecipePage.vue') },
     ]
+  },
+
+  {
+    path: '/connexion', 
+    name: 'connexion',
+    component: () => import('pages/authentification/ConnexionPage.vue')
+  },
+
+  {
+    path: '/inscription',
+    component: () => import('pages/authentification/InscriptionPage.vue'),
   },
 
   // Always leave this as last one,

@@ -1,30 +1,28 @@
 <template>
   <q-page class="flex flex-center">
+    <CardRecipe />
+    <SpinnerGenerateRecipe />
     <FilterButton />
+
+    <SearchBar />
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import SpinnerGenerateRecipe from "src/components/SpinnerGenerateRecipe.vue";
 import FilterButton from "src/components/FilterButton.vue";
-//checkbox
-import { ref } from "vue";
-import { api } from "src/utils/api";
+import SearchBar from "src/components/SearchBar.vue";
+import CardRecipe from "src/components/CardRecipe.vue";
 
 export default defineComponent({
   name: "IndexPage",
 
   components: {
     FilterButton,
-  },
-
-  async setup() {
-    const API = new api();
-    const results = await API.get6RandomRecipes();
-    console.log(results);
-    return {
-      val: ref(true),
-    };
+    SearchBar,
+    CardRecipe,
+    SpinnerGenerateRecipe,
   },
 });
 </script>
