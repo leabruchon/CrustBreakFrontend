@@ -19,6 +19,9 @@ export default defineComponent({
   },
 
   async setup() {
+    const API = new api();
+    const results = await API.get6RandomRecipes();
+    console.log(results);
     return {
       val: ref(true),
     };
