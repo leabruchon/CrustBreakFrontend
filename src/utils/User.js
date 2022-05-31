@@ -95,7 +95,7 @@ export class User {
     this._gouts = gouts;
   }
 
-  get id() {
+  getid() {
     return this._id;
   }
 

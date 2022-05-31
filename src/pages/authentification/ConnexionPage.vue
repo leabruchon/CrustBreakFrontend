@@ -48,9 +48,12 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { api } from "../../utils/api"
+import { SessionStorage } from 'quasar'
 
 export default defineComponent({
   name: 'ConnexionPage',
+
 
   data () {
     return {
@@ -60,12 +63,24 @@ export default defineComponent({
       }
     }
   },
+
   methods: {
-    submitForm () {
-      alert('Formulaire envoyé !')
+    async submitForm () {
+      const API = new api();
+
+      const valeur = await API.checkUserCanSignIn(this.form.email, this.form.password);
+
+      if(valeur['code'] == 1){
+        const user = valeur['user']
+
+        SessionStorage.set('user', user.getid())
+        this.$router.push({ name: 'home' });
+
+      }
+      else alert(valeur['message'])
     },
+
     validateEmail (email) {
-      // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
     }

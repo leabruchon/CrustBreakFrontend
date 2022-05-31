@@ -8,6 +8,7 @@
 <script>
 import { defineComponent } from 'vue'
 import RecipesCalendar from "src/components/RecipesCalendar.vue";
+import { SessionStorage } from 'quasar'
 
 export default defineComponent({
   name: 'CalendarPage',
@@ -15,5 +16,14 @@ export default defineComponent({
   components: {
     RecipesCalendar
   },
+
+  mounted() {
+    if (SessionStorage.getItem('user') == null) {
+      console.log("personne est co") 
+      this.$router.push({ name: 'connexion' });
+    } else {
+      console.log("qq est co ouloulou")
+    }
+  }
 })
 </script>

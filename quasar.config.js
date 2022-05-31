@@ -105,7 +105,8 @@ module.exports = configure(function (ctx) {
 
       // Quasar plugins
       plugins: [
-        'Dialog'
+        'Dialog',
+        'SessionStorage'
       ]
     },
 

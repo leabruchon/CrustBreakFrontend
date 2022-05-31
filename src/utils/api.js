@@ -54,6 +54,71 @@ export class api {
   }
 
   /**
+   * A function with the aim to get 6 random recipes.
+   * @return {JSON} the json response
+   */
+  get6RandomRecipes() {
+    const search_titles = [
+      "burger",
+      "pizza",
+      "sushi",
+      "pasta",
+      "kebab",
+      "tacos",
+      "burritos",
+      "beef",
+      "chicken",
+      "lamb",
+    ];
+    let search_title =
+      search_titles[Math.floor(Math.random() * search_titles.length)];
+    const cusine_types = ["italien", "asian", "american", "french"];
+    let cusine_type =
+      cusine_types[Math.floor(Math.random() * cusine_types.length)];
+    let meal_type = "";
+    let diet = "";
+    let exclude_ingredient = [];
+    const url = `${
+      this._host
+    }/api/v1/recette/search?name=${search_title.toLowerCase()}&cuisine=${cusine_type.toLowerCase()}&type=${meal_type.toLowerCase()}&diet=${diet.toLowerCase()}&exclude=${exclude_ingredient
+      .join(",")
+      .toLowerCase()}`;
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              if (result["results"].length > 6) {
+                return result["results"]
+                  .map((r) => {
+                    return new Recipe(r["id"], r["title"], r["image"]);
+                  })
+                  .slice(0, 6);
+              } else {
+                return result["results"].map((r) => {
+                  return new Recipe(r["id"], r["title"], r["image"]);
+                });
+              }
+            })
+        );
+      }, 3000);
+    });
+  }
+
+  /**
    * A function with the aim to search for a recipe over our api using several fields
    * @param {Number} recipe_id The recipe id from the api example : 479101
    * @return {Recipe} the json response
@@ -267,7 +332,7 @@ export class api {
                   code: result["code"],
                   message: result["message"],
                   user: new User(
-                    2,
+                    result["user"]["id"],
                     result["user"]["prenom"],
                     result["user"]["nom"],
                     result["user"]["naissance"],
@@ -471,6 +536,46 @@ export class api {
                 JSON.stringify(Object.assign({}, data))
               );
               return result;
+            })
+        );
+      }, 3000);
+    });
+  }
+
+  /**
+   * A function with theaim to return the user from
+   * @param {Number} user_id user's Id
+   * @return {User} The user corresponding to the id
+   */
+  getUserFromId(user_id) {
+    const url = `${this._host}/api/v1/user/detail/${user_id}`;
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              return new User(
+                result["id"],
+                result["prenom"],
+                result["nom"],
+                result["naissance"],
+                result["email"],
+                result["password"],
+                result["gouts"]
+              );
             })
         );
       }, 3000);

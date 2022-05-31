@@ -49,6 +49,7 @@ Fonctions concernées :
 
 ```js
 searchRecipe(search_title, cusine_type, meal_type, diet, exclude_ingredient); //rechercher des recettes
+get6RandomRecipes(); //permet de récupérer 6 recettes au hasard dans la bdd
 getRecipeDetails(recipe_id); //Trouver les détails d'une recette -> nécessaire pour afficher le temps de préparation, les ingrédients, les étapes...
 getIngredientListFromRecipe(recipe_id); //générer une liste de course
 getRecipesFromImage(ingredient_list_image); //générer des recette à partir d'une image
@@ -101,4 +102,18 @@ if (rep["code"] === 1) {
 } else {
   console.log(rep["message"]);
 }
+```
+
+## Retrouver l'utilisateur connecté
+
+Evidemment ce code devra être dans une fonction `async`.
+`user_connected` est du type `User`
+
+```js
+import { api } from "src/utils/api";
+
+...
+
+const API = new api();
+const user_connected = await API.getUserFromId(4);
 ```
