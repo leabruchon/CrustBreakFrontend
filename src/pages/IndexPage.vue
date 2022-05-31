@@ -1,10 +1,18 @@
 <template>
   <q-page class="flex flex-center">
-    <CardRecipe />
-    <SpinnerGenerateRecipe />
-    <FilterButton />
-
-    <SearchBar />
+    <div class = "top-bar">
+      <SearchBar />
+      <FilterButton />
+      <q-icon class ="user" name="account_circle" />
+    </div>
+    <div class = "spinner-generation">
+      <SpinnerGenerateRecipe />
+    </div>
+    <div class = "recipes">
+      <CardRecipe />
+    </div>
+    
+    
   </q-page>
 </template>
 
@@ -26,3 +34,22 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss">
+  .top-bar{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .spinner-generation{
+    display: flex;
+    justify-content: center;
+  }
+
+  .user{
+    color: $positive;
+    size: 10rem;
+  }
+</style>
