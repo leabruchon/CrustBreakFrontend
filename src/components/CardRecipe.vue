@@ -57,10 +57,9 @@ export default defineComponent({
       }
     },
 
-    //NOT WORKING need parent
     ClickLike(Recette_ID) {
+      console.log("Log enfant Id Recette : " + Recette_ID);
       this.$emit("AddToLike", Recette_ID);
-      console.log("ID recette add : " + Recette_ID);
     },
   },
 

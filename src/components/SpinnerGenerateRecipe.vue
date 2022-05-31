@@ -6,7 +6,7 @@
       <div class="NumberPlates">{{ count }}</div>
       <div v-on:click="add"><q-btn icon="add" color="primary" /></div>
     </div>
-    <ClassicButton />
+    <ClassicButton v-on:click="NbRecetteToParent(this.count)" />
   </div>
 </template>
 
@@ -32,6 +32,11 @@ export default defineComponent({
       if (this.count > 0) {
         this.count--;
       }
+    },
+
+    NbRecetteToParent(NbRec) {
+      console.log("LogEnfant Nb Recettes: " + NbRec);
+      this.$emit("NbRecette", NbRec);
     },
   },
 

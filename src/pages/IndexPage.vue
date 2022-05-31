@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
-    <CardRecipe />
-    <SpinnerGenerateRecipe />
+    <CardRecipe @AddToLike="ChangeStateLike" />
+    <SpinnerGenerateRecipe @NbRecette="TakeNbRecFromChild" />
     <FilterButton />
 
     <SearchBar />
@@ -21,6 +21,15 @@ import { api } from "src/utils/api";
 
 export default defineComponent({
   name: "IndexPage",
+
+  methods: {
+    ChangeStateLike(IdRecette) {
+      console.log("LogParent Id Recette : " + IdRecette);
+    },
+    TakeNbRecFromChild(NbRecChild) {
+      console.log("LogParent Nb Recettes : " + NbRecChild);
+    },
+  },
 
   components: {
     FilterButton,
