@@ -30,8 +30,8 @@ export default defineComponent({
     FilterButton,
     SearchBar,
     CardRecipe,
-    SpinnerGenerateRecipe
-  }
+    SpinnerGenerateRecipe,
+  },
 });
 </script>
 
