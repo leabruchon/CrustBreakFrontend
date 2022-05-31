@@ -103,3 +103,17 @@ if (rep["code"] === 1) {
   console.log(rep["message"]);
 }
 ```
+
+## Retrouver l'utilisateur connecté
+
+Evidemment ce code devra être dans une fonction `async`.
+`user_connected` est du type `User`
+
+```js
+import { api } from "src/utils/api";
+
+...
+
+const API = new api();
+const user_connected = await API.getUserFromId(4);
+```

@@ -541,4 +541,44 @@ export class api {
       }, 3000);
     });
   }
+
+  /**
+   * A function with theaim to return the user from
+   * @param {Number} user_id user's Id
+   * @return {User} The user corresponding to the id
+   */
+  getUserFromId(user_id) {
+    const url = `${this._host}/api/v1/user/detail/${user_id}`;
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url, {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              const result = JSON.parse(
+                JSON.stringify(Object.assign({}, data))
+              );
+              return new User(
+                result["id"],
+                result["prenom"],
+                result["nom"],
+                result["naissance"],
+                result["email"],
+                result["password"],
+                result["gouts"]
+              );
+            })
+        );
+      }, 3000);
+    });
+  }
 }
