@@ -7,10 +7,10 @@
 
 <script>
 import { defineComponent } from "vue";
-import { useQuasar } from "quasar";
+import { api } from "../utils/api";
 
 export default defineComponent({
-  name: "HelloWorld",
+  name: "UploadImage",
   data() {
     return {
       selectedFile: null,
@@ -20,7 +20,13 @@ export default defineComponent({
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
     },
-    onUpload() {},
+    async onUpload() {
+      const API = new api();
+      console.log(this.selectedFile);
+      const recipes = await API.getRecipesFromImage(this.selectedFile);
+      console.log(recipes);
+      //this.$router.push({ name: "connexion" });
+    },
   },
 });
 </script>

@@ -15,12 +15,15 @@
     <canvas width="500" height="375" ref="canvas" id="canvas" />
 
     <button @click="takepicture" class="button">Take Photo</button>
+    <button @click="generateRecipes" class="button">Generate recipes</button>
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import { SessionStorage } from "quasar";
+import { dataURLtoFile } from "../utils/utils";
+import { api } from "../utils/api";
 
 export default {
   name: "ScanPage",
@@ -49,8 +52,15 @@ export default {
     takepicture() {
       let context = this.$refs.canvas.getContext("2d");
       context.drawImage(this.$refs.video, 0, 0, 500, 375);
-      let data = this.$refs.canvas.toDataURL("image/png");
-      this.photoSource = data;
+      const myFile = dataURLtoFile(this.$refs.canvas.toDataURL("image/png")); //la fonction dataURLtoFile va générer un fichier qui va pouvoir ensuite être transmis à l'API dan sla fonction generateRecipes
+      this.photoSource = myFile;
+    },
+    /*Fonction qui permet de générer des recettes à partir du rempliassage de la variable this.photoSource*/
+    async generateRecipes() {
+      const API = new api();
+      console.log(this.photoSource);
+      const recipes = await API.getRecipesFromImage(this.photoSource);
+      console.log(recipes);
     },
     clearPhoto() {
       const context = this.$refs.canvas.getContext("2d");

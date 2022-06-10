@@ -1,5 +1,5 @@
 <template>
-  <HelloWorld />
+  <UploadImage />
   <q-page class="flex flex-center"> </q-page>
 </template>
 
@@ -8,13 +8,13 @@ import { defineComponent } from "vue";
 
 //checkbox
 import { ref } from "vue";
-import HelloWorld from "src/components/HelloWorld.vue";
+import UploadImage from "src/components/UploadImage.vue";
 
 export default defineComponent({
   name: "GaleryPage",
 
   components: {
-    HelloWorld,
+    UploadImage,
   },
 
   setup() {
