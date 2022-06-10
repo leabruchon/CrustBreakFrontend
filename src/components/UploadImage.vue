@@ -25,7 +25,6 @@ export default defineComponent({
       console.log(this.selectedFile);
       const recipes = await API.getRecipesFromImage(this.selectedFile);
       console.log(recipes);
-      //this.$router.push({ name: "connexion" });
     },
   },
 });
