@@ -191,21 +191,21 @@ export class api {
 
   /**
    * A function with the aim to generate a recipe list that match all the ingredient of a receipts (currently not working with image -> return always the same result)
-   * @param {String} ingredient_list_image String that contains the B64 encoded image
+   * @param {File} ingredient_list_image File that contains image
    * @return {JSON} the json response
    */
   getRecipesFromImage(ingredient_list_image) {
-    const url = `${this._host}/api/v1/recette/generate-recipe?imageB64=${ingredient_list_image}`;
+    const url = `${this._host}/api/v1/recette/generate-recipe`;
+    let formData = new FormData();
+
+    formData.append("img", ingredient_list_image);
 
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(
           fetch(url, {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
+            method: "POST",
+            body: formData,
           })
             .then((res) => {
               return res.json();
