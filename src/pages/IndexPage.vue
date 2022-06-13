@@ -84,6 +84,12 @@ import CardRecipe from "src/components/CardRecipe.vue";
 export default defineComponent({
   name: "IndexPage",
 
+  data() {
+    return {
+      recettes: null,
+    };
+  },
+
   methods: {
     LoadSixStations() {
       return "test";
@@ -97,7 +103,7 @@ export default defineComponent({
     },
   },
 
-  data() {},
+  async mounted() {},
 
   components: {
     FilterButton,
