@@ -1,101 +1,98 @@
 <template>
-  
-  <q-layout >
-        <q-page class = "q-pa-md">
-            <div class = "log-in-title">
-                <h6 class="text-center">Connexion</h6>
-            </div>
-    
-            <div class = "log-in-form-container">
-                <q-form 
-                @submit.prevent="submitForm"
-                >
-                    <q-input
-                    outlined
-                    v-model="form.email"
-                    label="E-mail"
-                    class="q-my-md"
-                    label-color = "negative"   
-                    color = "warning"
-                    bg-color="positive"
-                    :rules="[val => validateEmail(val) || 'Email invalide']"
-                    />
+  <q-layout>
+    <q-page class="q-pa-md">
+      <div class="log-in-title">
+        <h6 class="text-center">Connexion</h6>
+      </div>
 
-                    <q-input
-                    type="password"
-                    outlined
-                    v-model="form.password"
-                    label="Mot de passe"
-                    class="q-my-md"
-                    label-color = "negative"   
-                    color = "warning"
-                    bg-color="positive"
-                    :rules="[ val => val.length >= 4 || 'Minimum 4 caractère']"
-                    lazy-rules
-                    />
+      <div class="log-in-form-container">
+        <q-form @submit.prevent="submitForm">
+          <q-input
+            outlined
+            v-model="form.email"
+            label="E-mail"
+            class="q-my-md"
+            label-color="negative"
+            color="warning"
+            bg-color="positive"
+            :rules="[(val) => validateEmail(val) || 'Email invalide']"
+          />
 
-                    <q-btn
-                    type="submit"
-                    color="warning"
-                    class = "text-capitalize "
-                    label="Connexion"
-                    />
-                </q-form>
-            </div>
-        </q-page>
-    </q-layout>
+          <q-input
+            type="password"
+            outlined
+            v-model="form.password"
+            label="Mot de passe"
+            class="q-my-md"
+            label-color="negative"
+            color="warning"
+            bg-color="positive"
+            :rules="[(val) => val.length >= 4 || 'Minimum 4 caractère']"
+            lazy-rules
+          />
+
+          <q-btn
+            type="submit"
+            color="warning"
+            class="text-capitalize"
+            label="Connexion"
+          />
+        </q-form>
+      </div>
+    </q-page>
+  </q-layout>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { api } from "../../utils/api"
-import { SessionStorage } from 'quasar'
+import { defineComponent } from "vue";
+import { api } from "../../utils/api";
+import { SessionStorage } from "quasar";
 
 export default defineComponent({
-  name: 'ConnexionPage',
+  name: "ConnexionPage",
 
-
-  data () {
+  data() {
     return {
       form: {
-        email: '',
-        password: '',
-      }
-    }
+        email: "",
+        password: "",
+      },
+    };
   },
 
   methods: {
-    async submitForm () {
+    async submitForm() {
       const API = new api();
 
-      const valeur = await API.checkUserCanSignIn(this.form.email, this.form.password);
+      const valeur = await API.checkUserCanSignIn(
+        this.form.email,
+        this.form.password
+      );
 
-      if(valeur['code'] == 1){
-        const user = valeur['user']
+      if (valeur["code"] == 1) {
+        const user = valeur["user"];
 
-        SessionStorage.set('user', user.getid())
-        this.$router.push({ name: 'home' });
-
-      }
-      else alert(valeur['message'])
+        SessionStorage.set("user", user.getid());
+        this.$router.push({ name: "home" });
+      } else alert(valeur["message"]);
     },
 
-    validateEmail (email) {
-      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      return re.test(String(email).toLowerCase())
-    }
-  }
-
-})
+    validateEmail(email) {
+      const re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    },
+  },
+});
 </script>
 
 <style lang="scss">
-    .q-field__messages{
-        color: $positive;
-    }
+.q-field__messages {
+  color: $positive;
+}
 
-    h6{
-        color: $positive;
-        margin: 0;
-    }
+h6 {
+  color: $positive;
+  margin: 0;
+}
 </style>

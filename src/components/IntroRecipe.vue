@@ -5,7 +5,7 @@
     </h1>
 
     <q-img
-      :src="require(`../assets/${image}`)"
+      :src="image"
       class="imageRecipe"
       :ratio="2 / 1"
     />
