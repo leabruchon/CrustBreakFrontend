@@ -8,7 +8,9 @@
         >favorite</span
       >
     </div>
-    <div class="bottom">{{ RecetteTitle }}</div>
+    <div class="bottom" v-on:click="ClickName(this.RecetteID)">
+      {{ RecetteTitle }}
+    </div>
   </div>
 </template>
 
@@ -57,10 +59,14 @@ export default defineComponent({
       }
     },
 
-    //NOT WORKING need parent
     ClickLike(Recette_ID) {
+      console.log("Log enfant Id Recette : " + Recette_ID);
       this.$emit("AddToLike", Recette_ID);
-      console.log("ID recette add : " + Recette_ID);
+    },
+
+    ClickName(Recette_ID) {
+      console.log("changement de page : " + Recette_ID);
+      this.$router.push({ name: "IDRecette", RecetteID });
     },
   },
 
