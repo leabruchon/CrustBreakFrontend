@@ -109,6 +109,7 @@ img {
   top: 5%;
   right: 5%;
   font-size: 2rem;
+  visibility: hidden;
 }
 .container {
   position: relative;
