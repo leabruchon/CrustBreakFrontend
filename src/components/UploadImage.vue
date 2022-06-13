@@ -1,7 +1,6 @@
 <template>
   <div class="div_buttons">
     <input type="file" @change="onFileSelected" />
-    <button @click="onUpload">Générer une recette</button>
   </div>
 </template>
 
@@ -19,12 +18,6 @@ export default defineComponent({
   methods: {
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
-    },
-    async onUpload() {
-      const API = new api();
-      console.log(this.selectedFile);
-      const recipes = await API.getRecipesFromImage(this.selectedFile);
-      console.log(recipes);
     },
   },
 });
