@@ -1,9 +1,9 @@
 <template>
   <q-page class="flex flex-center">
     <IntroRecipe
-      title="Nom de la recette un peu long"
-      image="imageRecipe.jpeg"
-      time="9"
+      :title="titreRecette"
+      :image="imageRecette"
+      :time="tempsRecette"
       nbPerson="3"
     />
 
@@ -36,13 +36,26 @@ export default defineComponent({
   data() {
     return {
       recette_detaillee: null,
+      titreRecette: "",
+      tempsRecette: "",
+      imageRecette: "",
     };
   },
   async mounted() {
+    const recette_id_to_search =
+      this.$router.currentRoute._value.params["RecetteID"] === undefined ||
+      this.$router.currentRoute._value.params["RecetteID"] === {} ||
+      this.$router.currentRoute._value.params["RecetteID"] === null
+        ? 479101
+        : Number(this.$router.currentRoute._value.params["RecetteID"]);
     const API = new api();
-    const recette = await API.getRecipeDetails(479101);
+    const recette = await API.getRecipeDetails(recette_id_to_search);
     this.recette_detaillee = recette;
-    //console.log(this.recette_detaillee._title);
+    this.titreRecette = recette._title;
+    this.tempsRecette = recette._readyInMinutes;
+    this.imageRecette = recette._image;
+
+    console.log(this.imageRecette);
   },
 });
 </script>
