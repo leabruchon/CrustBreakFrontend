@@ -90,7 +90,9 @@ export default {
     this.getConnectedDevices();
     if (SessionStorage.getItem("user") == null) {
       console.log("personne est co");
-      this.$router.push({ name: "connexion" });
+      this.$router.push({
+        name: "connexion",
+      });
     } else {
       console.log("qq est co ouloulou");
     }
