@@ -47,12 +47,14 @@ export default defineComponent({
       audioDevices: null,
       selectedCamera: null,
       selectedMic: null,
+      provenance: "",
     };
   },
   methods: {
     //methode qui permet de récupérer le fichier uploadé grâce au binding
     getFileUploaded(myFile) {
       this.photoSource = myFile;
+      this.provenance = "Upload photo";
     },
     startup() {
       navigator.mediaDevices
@@ -70,13 +72,20 @@ export default defineComponent({
       context.drawImage(this.$refs.video, 0, 0, 500, 375);
       const myFile = dataURLtoFile(this.$refs.canvas.toDataURL("image/png")); //la fonction dataURLtoFile va générer un fichier qui va pouvoir ensuite être transmis à l'API dan sla fonction generateRecipes
       this.photoSource = myFile;
+      this.provenance = "Appareil photo";
     },
     /*Fonction qui permet de générer des recettes à partir du rempliassage de la variable this.photoSource*/
     async generateRecipes() {
       const API = new api();
-      console.log(this.photoSource);
       const recipes = await API.getRecipesFromImage(this.photoSource);
       console.log(recipes);
+      this.$router.push({
+        name: "resultat",
+        params: {
+          ListRecettes: recipes,
+          Provenance: this.provenance,
+        },
+      });
     },
     clearPhoto() {
       const context = this.$refs.canvas.getContext("2d");
