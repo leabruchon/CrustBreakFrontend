@@ -21,7 +21,7 @@ vue/no-unused-components */
         Générer des recettes
       </button>
     </div>
-    <UploadImage />
+    <UploadImage @getFileFromUpload="getFileUploaded" />
   </div>
 </template>
 
@@ -50,6 +50,10 @@ export default defineComponent({
     };
   },
   methods: {
+    //methode qui permet de récupérer le fichier uploadé grâce au binding
+    getFileUploaded(myFile) {
+      this.photoSource = myFile;
+    },
     startup() {
       navigator.mediaDevices
         .getUserMedia({ video: true, audio: true })
@@ -66,7 +70,6 @@ export default defineComponent({
       context.drawImage(this.$refs.video, 0, 0, 500, 375);
       const myFile = dataURLtoFile(this.$refs.canvas.toDataURL("image/png")); //la fonction dataURLtoFile va générer un fichier qui va pouvoir ensuite être transmis à l'API dan sla fonction generateRecipes
       this.photoSource = myFile;
-      console.log(this.photoSource);
     },
     /*Fonction qui permet de générer des recettes à partir du rempliassage de la variable this.photoSource*/
     async generateRecipes() {
