@@ -1,5 +1,8 @@
 <template>
   <div class="conteneur">
+    <div class="Expl">Ici il y aura le court texte blabla</div>
+  </div>
+  <div class="conteneur">
     <div class="Column">
       <div v-for="recipe in firstHalf" :key="recipe._id">
         <CardRecipe
@@ -92,5 +95,16 @@ export default defineComponent({
 .separator {
   height: 10px;
   width: 10px;
+}
+
+.Expl {
+  display: flex;
+  text-align: center;
+  color: white;
+  width: 50%;
+  font-weight: 300;
+  font-size: 1rem;
+  margin-top: 8%;
+  margin-bottom: 8%;
 }
 </style>
