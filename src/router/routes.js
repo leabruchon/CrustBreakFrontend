@@ -24,6 +24,12 @@ const routes = [
         name: "detail",
         component: () => import("pages/RecipePage.vue"),
       },
+
+      {
+        path: "/result",
+        name: "resultat",
+        component: () => import("pages/ResultatsPage.vue"),
+      },
     ],
   },
 
