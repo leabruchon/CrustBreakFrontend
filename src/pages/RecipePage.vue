@@ -42,17 +42,14 @@ export default defineComponent({
     };
   },
   async mounted() {
-    recette_id_to_search = Number(
-      this.$router.currentRoute._value.params["RecetteID"]
-    );
-    const API = new api();
-    const recette = await API.getRecipeDetails(
-      recette_id_to_search === undefined ||
-        recette_id_to_search === {} ||
-        recette_id_to_search === null
+    const recette_id_to_search =
+      this.$router.currentRoute._value.params["RecetteID"] === undefined ||
+      this.$router.currentRoute._value.params["RecetteID"] === {} ||
+      this.$router.currentRoute._value.params["RecetteID"] === null
         ? 479101
-        : recette_id_to_search
-    );
+        : Number(this.$router.currentRoute._value.params["RecetteID"]);
+    const API = new api();
+    const recette = await API.getRecipeDetails(recette_id_to_search);
     this.recette_detaillee = recette;
     this.titreRecette = recette._title;
     this.tempsRecette = recette._readyInMinutes;
