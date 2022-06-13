@@ -1,3 +1,5 @@
+/* eslint-disable vue/no-unused-components */ /* eslint-disable
+vue/no-unused-components */
 <template>
   <div id="app">
     <div class="media">
@@ -13,9 +15,13 @@
       </video>
     </div>
     <canvas width="500" height="375" ref="canvas" id="canvas" />
-
-    <button @click="takepicture" class="button">Take Photo</button>
-    <button @click="generateRecipes" class="button">Generate recipes</button>
+    <div class="div_buttons">
+      <button @click="takepicture" class="button">Prendre une photo</button>
+      <button @click="generateRecipes" class="button">
+        Générer des recettes
+      </button>
+    </div>
+    <UploadImage />
   </div>
 </template>
 
@@ -24,9 +30,15 @@ import { defineComponent } from "vue";
 import { SessionStorage } from "quasar";
 import { dataURLtoFile } from "../utils/utils";
 import { api } from "../utils/api";
+import UploadImage from "src/components/UploadImage.vue";
 
-export default {
+export default defineComponent({
   name: "ScanPage",
+
+  components: {
+    UploadImage,
+  },
+
   data() {
     return {
       videoSource: null,
@@ -54,6 +66,7 @@ export default {
       context.drawImage(this.$refs.video, 0, 0, 500, 375);
       const myFile = dataURLtoFile(this.$refs.canvas.toDataURL("image/png")); //la fonction dataURLtoFile va générer un fichier qui va pouvoir ensuite être transmis à l'API dan sla fonction generateRecipes
       this.photoSource = myFile;
+      console.log(this.photoSource);
     },
     /*Fonction qui permet de générer des recettes à partir du rempliassage de la variable this.photoSource*/
     async generateRecipes() {
@@ -95,7 +108,7 @@ export default {
       console.log("qq est co ouloulou");
     }
   },
-};
+});
 </script>
 
 <style>
@@ -152,10 +165,12 @@ select {
   font-size: 1rem;
 }
 .button {
-  font-size: 1.3rem;
-  font-weight: 700;
-  padding: 1.5rem 2.5rem;
-  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
   outline: none;
   border-radius: 8px;
   cursor: pointer;
@@ -164,5 +179,10 @@ select {
 }
 .button:hover {
   background-color: rgb(36, 68, 167);
+}
+
+.div_buttons {
+  display: flex;
+  flex-direction: row;
 }
 </style>
