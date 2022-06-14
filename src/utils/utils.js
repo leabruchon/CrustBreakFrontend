@@ -25,3 +25,15 @@ export const dataURLtoFile = (dataurl) => {
     type: mime,
   });
 };
+
+export const serializeListRecetteShortRecette = (listRecette) => {
+  let finaleList = [];
+  listRecette.forEach((element) => {
+    finaleList.push({
+      _id: element._id,
+      _title: element._title,
+      _image: element._image,
+    });
+  });
+  return finaleList;
+};

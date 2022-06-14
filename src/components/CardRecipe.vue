@@ -66,7 +66,10 @@ export default defineComponent({
 
     ClickName(Recette_ID) {
       console.log("changement de page : " + Recette_ID);
-      this.$router.push({ name: "IDRecette", RecetteID });
+      this.$router.push({
+        name: "detail",
+        params: { RecetteID: Recette_ID },
+      });
     },
   },
 
@@ -106,6 +109,7 @@ img {
   top: 5%;
   right: 5%;
   font-size: 2rem;
+  visibility: hidden;
 }
 .container {
   position: relative;

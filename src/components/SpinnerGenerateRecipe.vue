@@ -6,7 +6,10 @@
       <div class="NumberPlates">{{ count }}</div>
       <div v-on:click="add"><q-btn icon="add" color="primary" /></div>
     </div>
-    <ClassicButton v-on:click="NbRecetteToParent(this.count)" />
+    <ClassicButton
+      v-on:click="NbRecetteToParent(this.count)"
+      BtnLabel="C'est parti !"
+    />
   </div>
 </template>
 

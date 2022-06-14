@@ -6,18 +6,12 @@
 
 <script>
 import { defineComponent } from "vue";
-import { api } from "../utils/api";
 
 export default defineComponent({
   name: "UploadImage",
-  data() {
-    return {
-      selectedFile: null,
-    };
-  },
   methods: {
     onFileSelected(event) {
-      this.selectedFile = event.target.files[0];
+      this.$emit("getFileFromUpload", event.target.files[0]);
     },
   },
 });
