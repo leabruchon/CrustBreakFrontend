@@ -3,9 +3,8 @@
     <div class="container">
       <img :src="RecetteImg" /><span
         v-on:click="ClickLike(this.RecetteID)"
-        id="Icon"
-        style=":color=couleuricon "
         class="material-icons-outlined md-inactive iconLike"
+        v-bind:style="{ color: colorLike }"
         >favorite</span
       >
     </div>
@@ -46,28 +45,31 @@ export default defineComponent({
   },
 
   data() {
-    return {};
+    return {
+      colorLike: "grey",
+    };
   },
 
   methods: {
     LikedState() {
       if (this.RecetteLiked == false) {
-        document.querySelectorAll(".iconLike").forEach((element) => {
-          element.style.color = "grey";
-        });
-
+        this.colorLike = "grey";
         console.log("Not liked");
       }
       if (this.RecetteLiked == true) {
-        document.querySelectorAll(".iconLike").forEach((element) => {
-          element.style.color = "red";
-        });
+        this.colorLike = "red";
       }
     },
 
     ClickLike(Recette_ID) {
       console.log("Log enfant Id Recette : " + Recette_ID);
-      this.$emit("AddToLike", Recette_ID);
+      if (this.colorLike == "red") {
+        this.colorLike = "grey";
+        console.log("liked");
+      } else {
+        this.colorLike = "red";
+        console.log("not liked");
+      }
     },
 
     ClickName(Recette_ID) {
@@ -119,9 +121,5 @@ img {
 .container {
   position: relative;
   display: inline-block;
-}
-
-#icon {
-  color: aqua;
 }
 </style>
