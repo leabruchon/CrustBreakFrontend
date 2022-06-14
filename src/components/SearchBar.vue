@@ -17,6 +17,12 @@ import { api } from "../utils/api";
 import { serializeListRecetteShortRecette } from "../utils/utils";
 export default defineComponent({
   name: "SearchBar",
+
+  data() {
+    return {
+      Provenance: "Recherche",
+    };
+  },
   methods: {
     async LaunchSearch(TextSearch) {
       const API = new api();
