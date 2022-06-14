@@ -428,7 +428,7 @@ export class api {
               });
             })
         );
-      }, 3000);
+      }, 5000);
     });
   }
   /**
@@ -462,7 +462,7 @@ export class api {
               return result;
             })
         );
-      }, 3000);
+      }, 5000);
     });
   }
 
@@ -501,7 +501,7 @@ export class api {
               });
             })
         );
-      }, 3000);
+      }, 5000);
     });
   }
 
@@ -539,7 +539,7 @@ export class api {
               return result;
             })
         );
-      }, 3000);
+      }, 5000);
     });
   }
 
