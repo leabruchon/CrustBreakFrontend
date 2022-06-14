@@ -31,7 +31,7 @@ import { SessionStorage } from "quasar";
 import { dataURLtoFile } from "../utils/utils";
 import { api } from "../utils/api";
 import UploadImage from "src/components/UploadImage.vue";
-
+import { serializeListRecetteShortRecette } from "../utils/utils";
 export default defineComponent({
   name: "ScanPage",
 
@@ -78,11 +78,12 @@ export default defineComponent({
     async generateRecipes() {
       const API = new api();
       const recipes = await API.getRecipesFromImage(this.photoSource);
-      console.log(recipes);
       this.$router.push({
         name: "resultat",
         params: {
-          ListRecettes: recipes,
+          ListRecettes: JSON.stringify(
+            serializeListRecetteShortRecette(recipes)
+          ),
           Provenance: this.provenance,
         },
       });

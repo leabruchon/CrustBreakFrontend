@@ -32,14 +32,12 @@ window.onload = function () {};
 import { defineComponent, onMounted } from "vue";
 
 import CardRecipe from "src/components/CardRecipe.vue";
-import { api } from "../utils/api";
 
 export default defineComponent({
   name: "IndexPage",
 
   data() {
     return {
-      recipes: null,
       ListRecettes: null,
       firstHalf: null,
       secondHalf: null,
@@ -58,19 +56,18 @@ export default defineComponent({
   },
 
   async mounted() {
-    const API = new api();
-    const recipes = await API.get6RandomRecipes();
-    this.recipes = recipes;
-    console.log(recipes);
-    this.ListRecettes = [];
-    recipes.forEach((element) => {
-      console.log(element._id);
-      this.ListRecettes.push({
-        _id: element._id,
-        _title: element._title,
-        _image: element._image,
-      });
-    });
+    let recipes = null;
+    let provenance = null;
+    console.log(this.$router.currentRoute._value.params["ListRecettes"]);
+    if (this.$router.currentRoute._value.params["ListRecettes"] === undefined) {
+      console.log("Erreur aucun resultat");
+    } else {
+      recipes = JSON.parse(
+        this.$router.currentRoute._value.params["ListRecettes"]
+      );
+      provenance = this.$router.currentRoute._value.params["Provenance"];
+    }
+    this.ListRecettes = recipes;
     this.twoHalfList();
     console.log(this.ListRecettes);
   },
