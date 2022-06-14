@@ -4,6 +4,7 @@
       <img :src="RecetteImg" /><span
         v-on:click="ClickLike(this.RecetteID)"
         id="Icon"
+        style=":color=couleuricon "
         class="material-icons-outlined md-inactive iconLike"
         >favorite</span
       >
@@ -51,11 +52,16 @@ export default defineComponent({
   methods: {
     LikedState() {
       if (this.RecetteLiked == false) {
-        document.getElementById("Icon").style.color = "grey";
+        document.querySelectorAll(".iconLike").forEach((element) => {
+          element.style.color = "grey";
+        });
+
         console.log("Not liked");
       }
       if (this.RecetteLiked == true) {
-        document.getElementById("Icon").style.color = "red";
+        document.querySelectorAll(".iconLike").forEach((element) => {
+          element.style.color = "red";
+        });
       }
     },
 
@@ -109,10 +115,13 @@ img {
   top: 5%;
   right: 5%;
   font-size: 2rem;
-  visibility: hidden;
 }
 .container {
   position: relative;
   display: inline-block;
+}
+
+#icon {
+  color: aqua;
 }
 </style>
