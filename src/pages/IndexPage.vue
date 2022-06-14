@@ -64,6 +64,10 @@ export default defineComponent({
     },
     TakeNbRecFromChild(NbRecChild) {
       console.log("LogParent Nb Recettes : " + NbRecChild);
+      this.$router.push({
+        name: "resultat",
+        params: { nbRecetteSelect: NbRecChild },
+      });
     },
 
     twoHalfList() {

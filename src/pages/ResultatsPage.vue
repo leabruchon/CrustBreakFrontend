@@ -64,7 +64,6 @@ export default defineComponent({
     console.log(recipes);
     this.ListRecettes = [];
     recipes.forEach((element) => {
-      console.log(element._id);
       this.ListRecettes.push({
         _id: element._id,
         _title: element._title,

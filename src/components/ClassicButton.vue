@@ -5,7 +5,7 @@
       :ripple="{ center: true }"
       rounded
       color="warning"
-      v-bind:label="BtnLabel"
+      v-bind:label="this.BtnLabel"
       no-caps
     />
 
