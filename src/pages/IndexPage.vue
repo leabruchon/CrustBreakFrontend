@@ -9,64 +9,27 @@
       <SpinnerGenerateRecipe @NbRecette="TakeNbRecFromChild" />
     </div>
     <div class="recipes">
-      <div class="rowReciepes">
-        <div class="reciepe">
-          <CardRecipe
-            @AddToLike="ChangeStateLike"
-            :RecetteID="rID1"
-            :RecetteTitle="rN1"
-            :RecetteImg="rImg1"
-            :RecetteLiked="rL1"
-          />
+      <div class="conteneur">
+        <div class="Column">
+          <div v-for="recipe in firstHalf" :key="recipe._id">
+            <CardRecipe
+              :RecetteID="recipe._id"
+              :RecetteImg="recipe._image"
+              :RecetteTitle="recipe._title"
+            />
+            <div class="separator"></div>
+          </div>
         </div>
-        <div class="reciepe">
-          <CardRecipe
-            @AddToLike="ChangeStateLike"
-            :RecetteID="rID2"
-            :RecetteTitle="rN2"
-            :RecetteImg="rImg2"
-            :RecetteLiked="rL2"
-          />
-        </div>
-      </div>
-      <div class="rowReciepes">
-        <div class="reciepe">
-          <CardRecipe
-            @AddToLike="ChangeStateLike"
-            :RecetteID="rID3"
-            :RecetteTitle="rN3"
-            :RecetteImg="rImg3"
-            :RecetteLiked="rL3"
-          />
-        </div>
-        <div class="reciepe">
-          <CardRecipe
-            @AddToLike="ChangeStateLike"
-            :RecetteID="rID4"
-            :RecetteTitle="rN4"
-            :RecetteImg="rImg4"
-            :RecetteLiked="rL4"
-          />
-        </div>
-      </div>
-      <div class="rowReciepes">
-        <div class="reciepe">
-          <CardRecipe
-            @AddToLike="ChangeStateLike"
-            :RecetteID="rID5"
-            :RecetteTitle="rN5"
-            :RecetteImg="rImg5"
-            :RecetteLiked="rL5"
-          />
-        </div>
-        <div class="reciepe">
-          <CardRecipe
-            @AddToLike="ChangeStateLike"
-            :RecetteID="rID6"
-            :RecetteTitle="rN6"
-            :RecetteImg="rImg6"
-            :RecetteLiked="rL6"
-          />
+        <div class="separator"></div>
+        <div class="Column">
+          <div v-for="recipe in secondHalf" :key="recipe._id" class="Card">
+            <CardRecipe
+              :RecetteID="recipe._id"
+              :RecetteImg="recipe._image"
+              :RecetteTitle="recipe._title"
+            />
+            <div class="separator"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -87,31 +50,11 @@ export default defineComponent({
 
   data() {
     return {
+      recipes: null,
+      ListRecettes: null,
+      firstHalf: null,
+      secondHalf: null,
       recettes: null,
-      rID1: "null",
-      rN1: "null",
-      rImg1: "https://spoonacular.com/recipeImages/639465-556x370.jpg",
-      rL1: false,
-      rID2: "null",
-      rN2: "null",
-      rImg2: "https://spoonacular.com/recipeImages/639465-556x370.jpg",
-      rL2: false,
-      rID3: "null",
-      rN3: "null",
-      rImg3: "https://spoonacular.com/recipeImages/639465-556x370.jpg",
-      rL3: false,
-      rID4: "null",
-      rN4: "null",
-      rImg4: "https://spoonacular.com/recipeImages/639465-556x370.jpg",
-      rL4: false,
-      rID5: "null",
-      rN5: "null",
-      rImg5: "https://spoonacular.com/recipeImages/639465-556x370.jpg",
-      rL5: false,
-      rID6: "null",
-      rN6: "null",
-      rImg6: "https://spoonacular.com/recipeImages/639465-556x370.jpg",
-      rL6: false,
     };
   },
 
@@ -122,52 +65,33 @@ export default defineComponent({
     TakeNbRecFromChild(NbRecChild) {
       console.log("LogParent Nb Recettes : " + NbRecChild);
     },
+
+    twoHalfList() {
+      console.log("coucuo");
+      for (var i = 0; i < this.ListRecettes.length; i++) {
+        const half = Math.ceil(this.ListRecettes.length / 2);
+        this.firstHalf = this.ListRecettes.splice(0, half);
+        this.secondHalf = this.ListRecettes.splice(-half);
+      }
+    },
   },
 
   async mounted() {
     const API = new api();
     const recipes = await API.get6RandomRecipes();
     console.log(recipes);
-
-    for (var i = 0; i < 6; i++) {
-      console.log(i);
-      if (i == 0) {
-        this.rN1 = recipes[i]._title;
-        this.rID1 = recipes[i]._ID;
-        this.rImg1 = recipes[i]._image;
-        console.log(recipes[i]._title);
-      }
-      if (i == 1) {
-        this.rN2 = recipes[i]._title;
-        this.rID2 = recipes[i]._ID;
-        this.rImg2 = recipes[i]._image;
-        console.log(recipes[i]._title);
-      }
-      if (i == 2) {
-        this.rN3 = recipes[i]._title;
-        this.rID3 = recipes[i]._ID;
-        this.rImg3 = recipes[i]._image;
-        console.log(recipes[i]._title);
-      }
-      if (i == 3) {
-        this.rN4 = recipes[i]._title;
-        this.rID4 = recipes[i]._ID;
-        this.rImg4 = recipes[i]._image;
-        console.log(recipes[i]._title);
-      }
-      if (i == 4) {
-        this.rN5 = recipes[i]._title;
-        this.rID5 = recipes[i]._ID;
-        this.rImg5 = recipes[i]._image;
-        console.log(recipes[i]._title);
-      }
-      if (i == 5) {
-        this.rN6 = recipes[i]._title;
-        this.rID6 = recipes[i]._ID;
-        this.rImg6 = recipes[i]._image;
-        console.log(recipes[i]._title);
-      }
-    }
+    this.recipes = recipes;
+    this.ListRecettes = [];
+    recipes.forEach((element) => {
+      console.log(element._id);
+      this.ListRecettes.push({
+        _id: element._id,
+        _title: element._title,
+        _image: element._image,
+      });
+    });
+    console.log(this.ListRecettes);
+    this.twoHalfList();
   },
 
   components: {
@@ -197,19 +121,19 @@ export default defineComponent({
   justify-content: center;
   margin: 24px;
 }
+.conteneur {
+  display: flex;
+  justify-content: center;
+}
 
-.recipes {
+.Column {
   display: flex;
   flex-direction: column;
 }
 
-.rowReciepes {
-  display: flex;
-  flex-direction: row;
-}
-
-.reciepe {
-  margin: 2%;
+.separator {
+  height: 10px;
+  width: 10px;
 }
 
 .user {
