@@ -18,13 +18,6 @@
             <strong>{{ time }} min</strong>
           </p>
         </div>
-
-        <div class="nbPeopleParam">
-          <q-icon name="people" size="26px" />
-          <p class="pParams">
-            <strong>{{ nbPerson }}</strong>
-          </p>
-        </div>
       </div>
 
       <div class="rightParams">
@@ -36,14 +29,17 @@
     </div>
 
     <p class="pTitre"><strong>Ingrédients</strong></p>
+
+    <ul class = "listIngredients">
+      <li v-for="ingredient in ingredients" v-bind:key="ingredient">
+        {{ingredient.name}}
+      </li>
+    </ul>
+    <p class="pTitre"><strong>Equipements</strong></p>
     <ul>
-      <li>Sweetened condensed milk</li>
-      <li>Brown sugar</li>
-      <li>Corn syrups</li>
-      <li>Butter</li>
-      <li>Sweetened condensed milk</li>
-      <li>Candy</li>
-      <li>Water</li>
+      <li v-for="equipement in equipements" v-bind:key="equipement">
+        {{equipement.name}}
+      </li>
     </ul>
   </div>
 </template>
@@ -58,7 +54,11 @@ export default defineComponent({
     image: String,
     time: Number,
     nbPerson: Number,
+    ingredients : Array,
+    equipements : Array,
   },
+
+
 });
 </script>
 
@@ -111,6 +111,6 @@ export default defineComponent({
 }
 
 ul {
-  list-style-type: "-";
+ padding: 15px;
 }
 </style>
