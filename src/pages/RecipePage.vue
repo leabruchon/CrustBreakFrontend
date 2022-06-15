@@ -66,10 +66,6 @@ export default defineComponent({
         step: element.step,
       })
     })
-
-     console.log(this.etapesList)
-
-    console.log(this.etapesRecette[0]['steps']);
   },
 });
 </script>
