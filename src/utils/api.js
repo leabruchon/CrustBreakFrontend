@@ -55,9 +55,10 @@ export class api {
 
   /**
    * A function with the aim to get 6 random recipes.
+   * @param {Number} n Number of recipes
    * @return {JSON} the json response
    */
-  get6RandomRecipes() {
+  get6RandomRecipes(n = 6) {
     const search_titles = [
       "burger",
       "pizza",
@@ -101,12 +102,12 @@ export class api {
               const result = JSON.parse(
                 JSON.stringify(Object.assign({}, data))
               );
-              if (result["results"].length > 6) {
+              if (result["results"].length > n) {
                 return result["results"]
                   .map((r) => {
                     return new Recipe(r["id"], r["title"], r["image"]);
                   })
-                  .slice(0, 6);
+                  .slice(0, n);
               } else {
                 return result["results"].map((r) => {
                   return new Recipe(r["id"], r["title"], r["image"]);
@@ -427,7 +428,7 @@ export class api {
               });
             })
         );
-      }, 3000);
+      }, 5000);
     });
   }
   /**
@@ -461,7 +462,7 @@ export class api {
               return result;
             })
         );
-      }, 3000);
+      }, 5000);
     });
   }
 
@@ -500,7 +501,7 @@ export class api {
               });
             })
         );
-      }, 3000);
+      }, 5000);
     });
   }
 
@@ -538,7 +539,7 @@ export class api {
               return result;
             })
         );
-      }, 3000);
+      }, 5000);
     });
   }
 
