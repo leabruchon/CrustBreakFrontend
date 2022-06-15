@@ -22,6 +22,7 @@
       class="ButtonClassic"
       :ripple="{ center: true }"
       rounded
+      @click="goToFavList"
       icon="favorite"
       color="warning"
       label="Mes recettes favorites"
@@ -41,6 +42,26 @@ import BackButton from "src/components/BackButton.vue";
 
 export default defineComponent({
   name: "FavoriteButton",
+  data() {
+    return {
+      user: null,
+    };
+  },
+  methods: {
+    async goToFavList() {
+      const fav_recipes = await this.user.getUserFavoriteRecipes();
+      console.log(serializeListRecetteShortRecette(fav_recipes));
+      this.$router.push({
+        name: "resultat",
+        params: {
+          ListRecettes: JSON.stringify(
+            serializeListRecetteShortRecette(fav_recipes)
+          ),
+          Provenance: "Favorites",
+        },
+      });
+    },
+  },
 
   async mounted() {
     const API = new api();
@@ -65,8 +86,8 @@ export default defineComponent({
       email: null,
       
     };
+    
   },
-
 });
 </script>
 

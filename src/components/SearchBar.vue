@@ -20,7 +20,7 @@ export default defineComponent({
 
   data() {
     return {
-      Provenance: "Recherche",
+      provenance: "Recherche",
     };
   },
   methods: {
