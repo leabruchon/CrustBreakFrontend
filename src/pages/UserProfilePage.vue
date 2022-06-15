@@ -39,6 +39,7 @@ import { defineComponent } from "vue";
 import { api } from "../utils/api";
 import { SessionStorage } from "quasar";
 import BackButton from "src/components/BackButton.vue";
+import {serializeListRecetteShortRecette} from "../utils/utils"
 
 export default defineComponent({
   name: "FavoriteButton",
@@ -66,11 +67,11 @@ export default defineComponent({
   async mounted() {
     const API = new api();
     
-    const user = await API.getUserFromId(SessionStorage.getItem("user")); 
-    this.prenom = user._firstname
-    this.nom = user._lastname
-    this.birthdate = user._birthdate
-    this.email = user._email
+    this.user = await API.getUserFromId(SessionStorage.getItem("user")); 
+    this.prenom = this.user._firstname
+    this.nom = this.user._lastname
+    this.birthdate = this.user._birthdate
+    this.email = this.user._email
     console.log(this.birthdate)
   },
 

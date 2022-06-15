@@ -25,6 +25,8 @@ export default defineComponent({
   background-color: $secondary;
   border-radius: 12px;
   color: white;
+  padding-bottom: 10px;
+  padding-top: 5px;
 
   margin-top: 2vh;
 }

@@ -194,5 +194,6 @@ export default defineComponent({
 .user {
   color: $positive;
   size: 10rem;
+  font-size: 40px;
 }
 </style>
