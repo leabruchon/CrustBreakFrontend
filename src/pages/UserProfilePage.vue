@@ -1,23 +1,44 @@
 <template>
-  <div>
-    <q-btn
+
+  <div class = "user-page">
+
+    <BackButton/>
+
+    <div class = "user-infos">
+      
+      <p>PRÉNOM</p>
+      <h6>{{prenom}}</h6>
+      <p>NOM</p>
+      <h6>{{nom}}</h6>
+      <p>DATE DE NAISSANCE</p>
+      <h6>{{birthdate}}</h6>
+      <p>EMAIL</p>
+      <h6>{{email}}</h6>
+
+    </div>
+
+    <div class = "favorite-btn">
+      <q-btn
       class="ButtonClassic"
       :ripple="{ center: true }"
       rounded
       @click="goToFavList"
       icon="favorite"
       color="warning"
-      label="Consulter mes recettes favorites"
+      label="Mes recettes favorites"
       no-caps
-    />
+      />
+    </div>
+    
   </div>
+
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import { api } from "../utils/api";
 import { SessionStorage } from "quasar";
-import { serializeListRecetteShortRecette } from "../utils/utils";
+import BackButton from "src/components/BackButton.vue";
 
 export default defineComponent({
   name: "FavoriteButton",
@@ -44,11 +65,28 @@ export default defineComponent({
 
   async mounted() {
     const API = new api();
-    this.user = await API.getUserFromId(
-      SessionStorage.getItem("user") == null
-        ? 2
-        : SessionStorage.getItem("user")
-    );
+    
+    const user = await API.getUserFromId(SessionStorage.getItem("user")); 
+    this.prenom = user._firstname
+    this.nom = user._lastname
+    this.birthdate = user._birthdate
+    this.email = user._email
+    console.log(this.birthdate)
+  },
+
+  components: {
+    BackButton
+  },
+
+  data() {
+    return {
+      prenom: null,
+      nom: null,
+      birthdate: null,
+      email: null,
+      
+    };
+    
   },
 });
 </script>
@@ -56,5 +94,28 @@ export default defineComponent({
 <style lang="scss">
 .ButtonClassic {
   padding: 8px;
+}
+
+.user-page{
+  padding: 10px;
+}
+
+.user-infos{
+  padding: 20px;
+  color: $positive;
+}
+
+h6{
+  margin: 0;
+  padding-bottom: 20px;
+
+}
+
+p{
+  margin-bottom: 0px;
+}
+
+.favorite-btn{
+  padding: 10px;
 }
 </style>

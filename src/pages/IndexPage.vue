@@ -3,7 +3,10 @@
     <div class="top-bar">
       <SearchBar />
       <FilterButton />
-      <q-icon class="user" name="account_circle" />
+      <q-item to="/user">
+        <q-icon class="user" name="account_circle" />
+      </q-item>
+      
     </div>
     <div class="spinner-generation">
       <SpinnerGenerateRecipe @NbRecette="TakeNbRecFromChild" />
@@ -181,7 +184,11 @@ export default defineComponent({
 
 .separator {
   height: 10px;
-  width: 10px;
+  width: 20px;
+}
+
+.card{
+  margin-bottom: 10px;
 }
 
 .user {
