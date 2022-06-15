@@ -47,7 +47,6 @@ export default defineComponent({
 
   methods: {
     twoHalfList() {
-      console.log("coucuo");
       for (var i = 0; i < this.ListRecettes.length; i++) {
         const half = Math.ceil(this.ListRecettes.length / 2);
         this.firstHalf = this.ListRecettes.splice(0, half);
@@ -59,7 +58,11 @@ export default defineComponent({
   async mounted() {
     let recipes = null;
     let provenance = null;
-    console.log(this.$router.currentRoute._value.params["ListRecettes"]);
+    let nbrec = null;
+
+    console.log(
+      "liste result :" + this.$router.currentRoute._value.params["ListRecettes"]
+    );
     if (this.$router.currentRoute._value.params["ListRecettes"] === undefined) {
       console.log("Erreur aucun resultat");
     } else {
@@ -67,12 +70,29 @@ export default defineComponent({
         this.$router.currentRoute._value.params["ListRecettes"]
       );
       provenance = this.$router.currentRoute._value.params["Provenance"];
+      nbrec = this.$router.currentRoute._value.params["Nombre"];
     }
     this.ListRecettes = recipes;
     if (this.ListRecettes == null) {
       this.TextDisplay = "Aucun résultat à afficher";
     } else {
       this.twoHalfList();
+    }
+
+    if (provenance == "Spinner") {
+      console.log("spinner taille rec" + nbrec);
+      if (nbrec == 0) {
+        this.TextDisplay = "Vous n'avez demandé aucune recette";
+      }
+      if (nbrec == 1) {
+        this.TextDisplay = "Voici votre recette générée aléatoirement !";
+      }
+      if (nbrec > 1) {
+        let part1 = "Voici vos ";
+        let part2 = nbrec;
+        let part3 = " recettes générées aléatoirement !";
+        this.TextDisplay = part1 + part2 + part3;
+      }
     }
 
     console.log(this.ListRecettes);
