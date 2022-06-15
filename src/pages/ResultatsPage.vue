@@ -117,7 +117,11 @@ export default defineComponent({
 
 .separator {
   height: 10px;
-  width: 10px;
+  width: 20px;
+}
+
+.card{
+  margin-bottom: 10px;
 }
 
 .Expl {

@@ -33,7 +33,7 @@
 
           <q-item to="/inscription">
                 <q-item-main label="inscription-router" class= "text">Vous n'avez pas de compte ? <span style="text-decoration: underline;">Inscrivez vous !</span></q-item-main>
-            </q-item>
+          </q-item>
 
           <div class="submit-btn">
             <q-btn

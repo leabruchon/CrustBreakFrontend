@@ -1,13 +1,15 @@
 <template>
   <div class = "btn">
-    <q-btn
-      class="ButtonClassic"
-      :ripple="{ center: true }"
-      rounded
-      icon="arrow_back"
-      color="warning"
-      no-caps
-    />
+      <q-item to="/">
+        <q-btn
+        class="ButtonClassic"
+        :ripple="{ center: true }"
+        rounded
+        icon="arrow_back"
+        color="warning"
+        no-caps
+        />
+      </q-item>
   </div>
 </template>
 
@@ -36,5 +38,6 @@ export default defineComponent({
 
 .btn{
     padding-bottom: 15px;
+    display: flex;
 }
 </style>

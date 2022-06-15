@@ -127,7 +127,7 @@ img {
   font-weight: 800;
   margin-left: 4px;
   margin-right: 0px;
-  height: 2rem;
+  height: 2.3rem;
   line-height: 0.8rem;
   width: 124px;
 }
@@ -141,5 +141,10 @@ img {
 .container {
   position: relative;
   display: inline-block;
+}
+
+.bottom{
+  font-size: 12px;
+  text-align: center;
 }
 </style>

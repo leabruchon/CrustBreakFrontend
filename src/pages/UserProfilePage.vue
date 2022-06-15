@@ -80,7 +80,7 @@ export default defineComponent({
 }
 
 .user-infos{
-  padding: 10px;
+  padding: 20px;
   color: $positive;
 }
 
