@@ -31,12 +31,19 @@
             lazy-rules
           />
 
-          <q-btn
+          <q-item to="/inscription">
+                <q-item-main label="inscription-router" class= "text">Vous n'avez pas de compte ? <span style="text-decoration: underline;">Inscrivez vous !</span></q-item-main>
+            </q-item>
+
+          <div class="submit-btn">
+            <q-btn
             type="submit"
             color="warning"
             class="text-capitalize"
             label="Connexion"
-          />
+            />
+          </div>
+          
         </q-form>
       </div>
     </q-page>
@@ -87,12 +94,27 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.q-field__messages {
-  color: $positive;
-}
+  .q-field__messages {
+    color: $positive;
+  }
 
-h6 {
-  color: $positive;
-  margin: 0;
-}
+  h6 {
+    color: $positive;
+    margin: 0;
+  }
+
+  .submit-btn{
+      display: flex;
+      justify-content: center;
+  }
+
+  .q-item{
+        display: flex;
+    justify-content: center;
+  } 
+  
+  .text{
+    color: white;
+    font-size: 12px;
+  }
 </style>
