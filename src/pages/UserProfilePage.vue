@@ -14,9 +14,18 @@
 
 <script>
 import { defineComponent } from "vue";
+import { api } from "../utils/api";
+import { SessionStorage } from "quasar";
 
 export default defineComponent({
   name: "FavoriteButton",
+
+  async mounted() {
+    const API = new api();
+    
+    const user = await API.getUserFromId(SessionStorage.getItem("user")); 
+    console.log(user._firstname)
+  },
 
 });
 </script>
