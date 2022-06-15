@@ -569,7 +569,7 @@ export class api {
                 JSON.stringify(Object.assign({}, data))
               );
               return new User(
-                result["id"],
+                user_id,
                 result["prenom"],
                 result["nom"],
                 result["naissance"],

@@ -4,6 +4,7 @@
       class="ButtonClassic"
       :ripple="{ center: true }"
       rounded
+      @click="goToFavList"
       icon="favorite"
       color="warning"
       label="Consulter mes recettes favorites"
@@ -16,17 +17,39 @@
 import { defineComponent } from "vue";
 import { api } from "../utils/api";
 import { SessionStorage } from "quasar";
+import { serializeListRecetteShortRecette } from "../utils/utils";
 
 export default defineComponent({
   name: "FavoriteButton",
+  data() {
+    return {
+      user: null,
+    };
+  },
+  methods: {
+    async goToFavList() {
+      const fav_recipes = await this.user.getUserFavoriteRecipes();
+      console.log(serializeListRecetteShortRecette(fav_recipes));
+      this.$router.push({
+        name: "resultat",
+        params: {
+          ListRecettes: JSON.stringify(
+            serializeListRecetteShortRecette(fav_recipes)
+          ),
+          Provenance: "Favorites",
+        },
+      });
+    },
+  },
 
   async mounted() {
     const API = new api();
-    
-    const user = await API.getUserFromId(SessionStorage.getItem("user")); 
-    console.log(user._firstname)
+    this.user = await API.getUserFromId(
+      SessionStorage.getItem("user") == null
+        ? 2
+        : SessionStorage.getItem("user")
+    );
   },
-
 });
 </script>
 

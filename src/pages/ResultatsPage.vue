@@ -94,6 +94,10 @@ export default defineComponent({
         let part3 = " recettes générées aléatoirement !";
         this.TextDisplay = part1 + part2 + part3;
       }
+    } else if (provenance == "Favorites") {
+      this.TextDisplay = "Vos recettes favorites !";
+    } else if (provenance == "Upload photo") {
+      this.TextDisplay = "Résultat de votre scan :";
     }
     if (provenance == "Recherche") {
       this.TextDisplay = "Voici le résultat de votre recherche";
