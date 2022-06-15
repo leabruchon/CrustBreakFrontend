@@ -9,6 +9,9 @@ vue/no-unused-components */
         class="img_random"
         id="ticket_random"
       />
+      <p class="HeadText">
+        Capturez votre ticket de caisse, et découvrez des nouvelles recettes:
+      </p>
     </div>
 
     <div class="div_buttons">
@@ -213,7 +216,10 @@ select {
 
 .div_photos {
   margin-top: 1.5rem;
-  margin-bottom: 6rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .img_random {
@@ -222,10 +228,17 @@ select {
 }
 
 .active {
-  visibility: hidden;
+  opacity: 0.33;
 }
 
 #bouton_generer {
   margin-left: 1.5rem;
+}
+
+.HeadText {
+  color: white;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.2em;
 }
 </style>
