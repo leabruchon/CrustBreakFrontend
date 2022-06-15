@@ -34,8 +34,9 @@
                     <q-input
                     outlined
                     type="date"
+                    label = "Date de naissance"
                     v-model="form.birthdate"
-                    class="q-my-md"
+                    class="q-my-md birthdate-input"
                     label-color = "negative"   
                     color = "warning"
                     bg-color="positive"
@@ -78,12 +79,15 @@
                     lazy-rules
                     />
 
-                    <q-btn
-                    type="submit"
-                    color="warning"
-                    class = "text-capitalize "
-                    label="Je m'inscris !"
-                    />
+                    <div class="submit-btn">
+                      <q-btn
+                      type="submit"
+                      color="warning"
+                      class = "text-capitalize "
+                      label="Je m'inscris !"
+                      />
+                    </div>
+                    
                 </q-form>
             </div>
         </q-page>
@@ -115,7 +119,8 @@ export default defineComponent({
     async submitForm () {
       const API = new api();
       const newUser = API.addUser(this.form.firstname, this.form.lastname, this.form.birthdate, this.form.email, this.form.password)
-      alert('Formulaire envoyé !')
+      this.$router.push({ name: 'connexion' });
+
     },
     validateEmail (email) {
       // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
@@ -134,6 +139,15 @@ export default defineComponent({
     h6{
         color: $positive;
         margin: 0;
+    }
+
+    .submit-btn{
+      display: flex;
+      justify-content: center;
+    }
+
+    .birthdate-input{
+      padding-bottom: 18px;
     }
 
    

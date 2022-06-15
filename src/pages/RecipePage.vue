@@ -4,20 +4,17 @@
       :title="titreRecette"
       :image="imageRecette"
       :time="tempsRecette"
-      nbPerson="3"
+      :ingredients="ingredientsRecette"
+      :equipements="equipementRecette"
     />
 
-    <StepRecipe
-      title="Step 1"
-      consigne="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisis eu at lacus aliquam amet libero. Vulputate est non diam cursus malesuada. Eget montes.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisis eu at lacus aliquam amet libero. Vulputate est non diam cursus malesuada. Eget montes."
-    />
 
-    <StepRecipe
-      title="Step 2"
-      consigne="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisis eu at lacus aliquam amet libero. Vulputate est non diam cursus malesuada. Eget montes.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisis eu at lacus aliquam amet libero. Vulputate est non diam cursus malesuada. Eget montes."
-    />
+    <div v-for="step in etapesList" :key="step._id" class = steps-recipe>
+      <StepRecipe
+      :title="step.id"
+      :consigne="step.step"
+      />
+    </div>
   </q-page>
 </template>
 
@@ -39,6 +36,10 @@ export default defineComponent({
       titreRecette: "",
       tempsRecette: "",
       imageRecette: "",
+      ingredientsRecette: [0]['name'],
+      equipementRecette: null,
+      etapesRecettes: null,
+      etapesList: null
     };
   },
   async mounted() {
@@ -54,8 +55,17 @@ export default defineComponent({
     this.titreRecette = recette._title;
     this.tempsRecette = recette._readyInMinutes;
     this.imageRecette = recette._image;
+    this.ingredientsRecette = recette._ingredientList
+    this.equipementRecette = recette._equipment
+    this.etapesRecette = recette._analyzedInstructions
+    this.etapesList = []
 
-    console.log(this.imageRecette);
+    this.etapesRecette[0]['steps'].forEach((element) => {
+      this.etapesList.push({
+        id: element.number,
+        step: element.step,
+      })
+    })
   },
 });
 </script>
