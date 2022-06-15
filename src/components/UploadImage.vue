@@ -1,6 +1,9 @@
 <template>
   <div class="div_buttons">
-    <input type="file" @change="onFileSelected" />
+    <label for="file">
+      <img src="/icons/app_photo_icon.png" alt="" class="bouton_photo" />
+    </label>
+    <input id="file" type="file" @change="onFileSelected" class="input-file" />
   </div>
 </template>
 
@@ -22,5 +25,14 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.input-file {
+  display: none;
+}
+
+.bouton_photo {
+  width: 50px;
+  height: auto;
 }
 </style>
