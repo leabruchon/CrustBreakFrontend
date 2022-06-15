@@ -33,7 +33,19 @@ export class User {
    */
   async getUserFavoriteRecipes() {
     const API = new api();
-    this._favorite_recipes = await API.getUserFavoriteRecipes(this._id);
+    const recipes = await API.getUserFavoriteRecipes(this._id);
+    for (const element of recipes) {
+      let recette = await API.getRecipeDetails(element._id);
+      this._favorite_recipes.push(recette);
+    }
+
+    //await Promise.all(
+    //  recipes.map(async (element) => {
+    //    let recette = await API.getRecipeDetails(element._id);
+    //    this._favorite_recipes.push(recette);
+    //  })
+    //);
+
     return this._favorite_recipes;
   }
 
