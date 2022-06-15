@@ -2,9 +2,9 @@
   <div class="card">
     <div class="container">
       <img :src="RecetteImg" /><span
-        v-on:click="ClickLike(this.RecetteID)"
-        id="Icon"
+        v-on:click="ClickLike(this.RecetteID, RecetteTitle)"
         class="material-icons-outlined md-inactive iconLike"
+        v-bind:style="{ color: colorLike }"
         >favorite</span
       >
     </div>
@@ -17,6 +17,9 @@
 <script>
 import { defineComponent, onMounted } from "vue";
 import "material-icons/iconfont/material-icons.css";
+import { User } from "../utils/User";
+import { SessionStorage } from "quasar";
+import { api } from "../utils/api";
 
 export default defineComponent({
   name: "CardRecipe",
@@ -45,23 +48,36 @@ export default defineComponent({
   },
 
   data() {
-    return {};
+    return {
+      colorLike: "grey",
+      user_connected: null,
+    };
   },
 
   methods: {
     LikedState() {
       if (this.RecetteLiked == false) {
-        document.getElementById("Icon").style.color = "grey";
+        this.colorLike = "grey";
+
         console.log("Not liked");
       }
       if (this.RecetteLiked == true) {
-        document.getElementById("Icon").style.color = "red";
+        this.colorLike = "red";
       }
     },
 
-    ClickLike(Recette_ID) {
+    async ClickLike(Recette_ID, RecetteTitle) {
       console.log("Log enfant Id Recette : " + Recette_ID);
-      this.$emit("AddToLike", Recette_ID);
+      if (this.colorLike == "red") {
+        this.colorLike = "grey";
+
+        console.log("liked");
+      } else {
+        this.colorLike = "red";
+        this.user_connected.addFavoriteRecipe(Recette_ID, RecetteTitle);
+        console.log("not liked");
+      }
+      console.log(await this.user_connected.getUserFavoriteRecipes());
     },
 
     ClickName(Recette_ID) {
@@ -73,8 +89,20 @@ export default defineComponent({
     },
   },
 
-  mounted() {
+  async mounted() {
     this.LikedState();
+
+    if (SessionStorage.getItem("user") == null) {
+      console.log("personne est co");
+      this.$router.push({
+        name: "connexion",
+      });
+    } else {
+      const id = SessionStorage.getItem("user");
+      console.log("qq est co ouloulou " + id);
+      const API = new api();
+      this.user_connected = await API.getUserFromId(id);
+    }
   },
 });
 </script>
@@ -109,7 +137,6 @@ img {
   top: 5%;
   right: 5%;
   font-size: 2rem;
-  visibility: hidden;
 }
 .container {
   position: relative;

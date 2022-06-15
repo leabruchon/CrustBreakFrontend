@@ -8,6 +8,12 @@
     <div class="spinner-generation">
       <SpinnerGenerateRecipe @NbRecette="TakeNbRecFromChild" />
     </div>
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
     <div class="recipes">
       <div class="conteneur">
         <div class="Column">
@@ -82,7 +88,10 @@ export default defineComponent({
 
   async mounted() {
     const API = new api();
+    let elemLoad = document.querySelector(".lds-ring");
+    elemLoad.style.display = "block";
     const recipes = await API.get6RandomRecipes();
+    elemLoad.style.display = "none";
     console.log(recipes);
     this.recipes = recipes;
     this.ListRecettes = [];
@@ -108,6 +117,41 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .PageIndex {
   align-content: flex-start;
 }
