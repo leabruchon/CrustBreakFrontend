@@ -2,26 +2,25 @@
 vue/no-unused-components */
 <template>
   <div id="app">
-    <div class="media">
-      <video
-        class="video"
-        width="500"
-        height="375"
-        ref="video"
-        :srcObject.prop="videoSource"
-        autoplay
-      >
-        Video stream not available.
-      </video>
+    <div class="div_photos">
+      <img
+        src="../../public/icons/ticket_random.png"
+        alt=""
+        class="img_random"
+        id="ticket_random"
+      />
     </div>
-    <canvas width="500" height="375" ref="canvas" id="canvas" />
+
     <div class="div_buttons">
-      <button @click="takepicture" class="button">Prendre une photo</button>
-      <button @click="generateRecipes" class="button">
+      <UploadImage @getFileFromUpload="getFileUploaded" />
+      <button
+        @click="generateRecipes"
+        class="q-btn q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle q-btn--rounded bg-warning text-white q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase ButtonClassic active"
+        id="bouton_generer"
+      >
         Générer des recettes
       </button>
     </div>
-    <UploadImage @getFileFromUpload="getFileUploaded" />
   </div>
 </template>
 
@@ -48,6 +47,7 @@ export default defineComponent({
       selectedCamera: null,
       selectedMic: null,
       provenance: "",
+      image: undefined,
     };
   },
   methods: {
@@ -55,6 +55,14 @@ export default defineComponent({
     getFileUploaded(myFile) {
       this.photoSource = myFile;
       this.provenance = "Upload photo";
+      const reader = new FileReader();
+      reader.readAsDataURL(this.photoSource);
+      reader.onload = (e) => {
+        this.image = e.target.result;
+        console.log(this.image);
+        document.getElementById("ticket_random").src = this.image;
+        document.getElementById("bouton_generer").classList.remove("active");
+      };
     },
     startup() {
       navigator.mediaDevices
@@ -77,6 +85,7 @@ export default defineComponent({
     /*Fonction qui permet de générer des recettes à partir du rempliassage de la variable this.photoSource*/
     async generateRecipes() {
       const API = new api();
+      console.log(this.photoSource);
       const recipes = await API.getRecipesFromImage(this.photoSource);
       this.$router.push({
         name: "resultat",
@@ -199,5 +208,24 @@ select {
 .div_buttons {
   display: flex;
   flex-direction: row;
+  height: 100%;
+}
+
+.div_photos {
+  margin-top: 1.5rem;
+  margin-bottom: 6rem;
+}
+
+.img_random {
+  width: 200px;
+  height: auto;
+}
+
+.active {
+  visibility: hidden;
+}
+
+#bouton_generer {
+  margin-left: 1.5rem;
 }
 </style>
