@@ -1,12 +1,10 @@
 <template>
   <div class="backgroundRecipe q-mx-md q-px-md">
-    <h1 class="text-h4">{{ title }}</h1>
+    <h1 class="text-h4">Étape {{ title }}</h1>
 
     <p>{{ consigne }}</p>
 
-    <p class="pTitre"><strong>Equipements</strong></p>
-    <i class="fa-solid fa-oven"></i>
-    <i class="fa-solid fa-flag"></i>
+    
   </div>
 </template>
 
@@ -17,7 +15,7 @@ export default defineComponent({
   name: "StepRecipe",
   props: {
     consigne: String,
-    title: String,
+    title: Number,
   },
 });
 </script>

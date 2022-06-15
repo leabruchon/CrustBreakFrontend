@@ -1,6 +1,6 @@
 <template>
   <div class="conteneur">
-    <div class="Expl">Ici il y aura le court texte blabla</div>
+    <div class="Expl">{{ TextDisplay }}</div>
   </div>
   <div class="conteneur">
     <div class="Column">
@@ -41,6 +41,7 @@ export default defineComponent({
       ListRecettes: null,
       firstHalf: null,
       secondHalf: null,
+      TextDisplay: "Chargement...",
     };
   },
 
@@ -68,7 +69,12 @@ export default defineComponent({
       provenance = this.$router.currentRoute._value.params["Provenance"];
     }
     this.ListRecettes = recipes;
-    this.twoHalfList();
+    if (this.ListRecettes == null) {
+      this.TextDisplay = "Aucun résultat à afficher";
+    } else {
+      this.twoHalfList();
+    }
+
     console.log(this.ListRecettes);
   },
 
