@@ -1,7 +1,7 @@
 <template>
   <div class="div_buttons">
     <label for="file">
-      <img src="/icons/app_photo_icon.png" alt="" class="bouton_photo" />
+      <img src="/icons/icon_photo.png" alt="" class="bouton_photo" />
     </label>
     <input id="file" type="file" @change="onFileSelected" class="input-file" />
   </div>

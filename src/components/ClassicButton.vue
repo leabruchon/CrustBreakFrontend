@@ -10,7 +10,7 @@
     />
 
     <!--
-      Chercher comment faire pour que le label soit une variable
+      Chercher comment faire pour que le label soit une variable TESTTTTTT OM ALLLEE
       -->
   </div>
 </template>
