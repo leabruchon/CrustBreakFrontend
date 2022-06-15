@@ -7,7 +7,7 @@
       <div v-on:click="add"><q-btn icon="add" color="primary" /></div>
     </div>
     <ClassicButton
-      v-on:click="NbRecetteToParent(this.count)"
+      v-on:click="GenerateRecettes(this.count)"
       BtnLabel="C'est parti !"
     />
   </div>
@@ -16,16 +16,34 @@
 <script>
 import { defineComponent } from "vue";
 import ClassicButton from "src/components/ClassicButton.vue";
+import { api } from "../utils/api";
+import { serializeListRecetteShortRecette } from "../utils/utils";
 
 export default defineComponent({
   name: "SpinnergenerateReciepe",
   data() {
     return {
       count: 0,
+      provenance: "Spinner",
     };
   },
 
   methods: {
+    async GenerateRecettes(Count) {
+      const API = new api();
+      const recipes = await API.get6RandomRecipes(Count);
+      console.log("wala" + recipes);
+      this.$router.push({
+        name: "resultat",
+        params: {
+          ListRecettes: JSON.stringify(
+            serializeListRecetteShortRecette(recipes)
+          ),
+          Provenance: this.provenance,
+        },
+      });
+    },
+
     add() {
       if (this.count < 10) {
         this.count++;
