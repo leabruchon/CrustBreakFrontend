@@ -70,6 +70,7 @@ export default defineComponent({
         this.$router.currentRoute._value.params["ListRecettes"]
       );
       provenance = this.$router.currentRoute._value.params["Provenance"];
+      console.log("ça vient de " + provenance);
       nbrec = this.$router.currentRoute._value.params["Nombre"];
     }
     this.ListRecettes = recipes;
@@ -93,6 +94,9 @@ export default defineComponent({
         let part3 = " recettes générées aléatoirement !";
         this.TextDisplay = part1 + part2 + part3;
       }
+    }
+    if (provenance == "Recherche") {
+      this.TextDisplay = "Voici le résultat de votre recherche";
     }
 
     console.log(this.ListRecettes);
